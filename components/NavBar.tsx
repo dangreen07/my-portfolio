@@ -26,13 +26,13 @@ export default function NavBar() {
             <div tabIndex={0} role="button" className="btn btn-ghost m-1"><IoShareSocialOutline size={24} /></div>
             <ul tabIndex={0} className="dropdown-content flex flex-col gap-2 menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
               <li><Link href={process.env.NEXT_PUBLIC_MEDIUM_URL??""} target="_blank"><Image src={"/Medium-Icon.svg"} alt={"Medium Icon"} width={24} height={24} /> Medium</Link></li>
-              <li><Link href={process.env.NEXT_PUBLIC_GITHUB_URL??""} target="_blank"><Image src={"/GitHub-Icon.svg"} alt={"GitHub Icon"} width={24} height={24} /> Github</Link></li>
+              <li><Link href={process.env.NEXT_PUBLIC_GITHUB_URL??""} target="_blank"><Image src={"/Github-Icon.svg"} alt={"GitHub Icon"} width={24} height={24} /> Github</Link></li>
               <li><Link href={process.env.NEXT_PUBLIC_TWITTER_URL??""} target="_blank"><Image src={"/X-Icon.svg"} alt={"Twitter Icon"} width={24} height={24} /> X</Link></li>
             </ul>
           </div>
           <div id="social-links" className="sm:flex items-center gap-24 hidden">
             <Link href={process.env.NEXT_PUBLIC_MEDIUM_URL??""} target="_blank"><Image src={"/Medium-Icon.svg"} alt={"Medium Icon"} width={24} height={24} /></Link>
-            <Link href={process.env.NEXT_PUBLIC_GITHUB_URL??""} target="_blank"><Image src={"/GitHub-Icon.svg"} alt={"GitHub Icon"} width={24} height={24} /></Link>
+            <Link href={process.env.NEXT_PUBLIC_GITHUB_URL??""} target="_blank"><Image src={"/Github-Icon.svg"} alt={"GitHub Icon"} width={24} height={24} /></Link>
             <Link href={process.env.NEXT_PUBLIC_TWITTER_URL??""} target="_blank"><Image src={"/X-Icon.svg"} alt={"Twitter Icon"} width={24} height={24} /></Link>
           </div>
         </div>
