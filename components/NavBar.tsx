@@ -8,7 +8,7 @@ const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
 export default function NavBar() {
     return (
-        <div id="navbar" className={`w-full bg-neutral h-28 flex justify-between items-center ${jetBrainsMono.className} px-2 sm:px-36 fixed top-0`}>
+        <div id="navbar" className={`z-50 w-full bg-neutral h-28 flex justify-between items-center ${jetBrainsMono.className} px-2 sm:px-36 fixed top-0`}>
           <div className="dropdown dropdown-right block sm:hidden">
             <div tabIndex={0} role="button" className="btn btn-ghost m-1"><RxHamburgerMenu size={24} /></div>
             <ul tabIndex={0} className="dropdown-content flex flex-col gap-2 menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
