@@ -59,16 +59,16 @@ export default async function ProjectPage({
                 <div className="prose text-white max-w-3xl">
                     {Array.isArray(projects.project_description) && <PortableText value={projects.project_description} />}
                 </div>
-                <h3 className="text-2xl font-bold">Related Websites</h3>
-                <ul className="list-inside flex flex-col gap-2">
+                { projects.related_websites != null && <h3 className="text-2xl font-bold">Related Websites</h3> }
+                { projects.related_websites != null &&<ul className="list-inside flex flex-col gap-2">
                     {projects.related_websites.map((website: string, index: number) => {
                         return (
                             <li key={index} className="list-disc"><Link className="link link-primary" target="_blank" href={website}>{website}</Link></li>
                         )
                     })}
-                </ul>
-                <h3 className="text-2xl font-bold">Related Blogs</h3>
-                <ul className="list-inside flex flex-col gap-2">
+                </ul> }
+                { projects.related_blog_posts != null && <h3 className="text-2xl font-bold">Related Blogs</h3> }
+                { projects.related_blog_posts != null && <ul className="list-inside flex flex-col gap-2">
                     {projects.related_blog_posts.map((current: {
                         slug: {
                             _type: string;
@@ -80,7 +80,7 @@ export default async function ProjectPage({
                             <li key={index} className="list-disc"><Link className="link link-primary" target="_blank" href={"/blog/" + current.slug.current}>{current.title}</Link></li>
                         )
                     })}
-                </ul>
+                </ul> }
             </div>
         </main>
     )
