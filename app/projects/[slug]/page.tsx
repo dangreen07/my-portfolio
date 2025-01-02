@@ -56,7 +56,7 @@ export default async function ProjectPage({
                         </Link>
                     </div>
                 </div>
-                <div className="prose text-white max-w-3xl">
+                <div className="prose prose-headings:text-neutral-100 text-neutral-100 max-w-3xl">
                     {Array.isArray(projects.project_description) && <PortableText value={projects.project_description} />}
                 </div>
                 { projects.related_websites != null && <h3 className="text-2xl font-bold">Related Websites</h3> }
