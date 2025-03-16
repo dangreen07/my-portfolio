@@ -1,40 +1,141 @@
-import Link from "next/link";
-import Image from "next/image";
-import { JetBrains_Mono } from "next/font/google";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoShareSocialOutline } from "react-icons/io5";
+"use client";
 
-const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
+import { FaGithub, FaTwitter, FaMedium } from "react-icons/fa";
 
 export default function NavBar() {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+        
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+    
+    const navLinks = [
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Projects", path: "/projects" },
+        { name: "Blog", path: "/blog" },
+    ];
+    
+    const socialLinks = [
+        { 
+            name: "GitHub", 
+            path: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com", 
+            icon: <FaGithub className="w-5 h-5" />
+        },
+        { 
+            name: "Twitter", 
+            path: process.env.NEXT_PUBLIC_TWITTER_URL ?? "https://twitter.com", 
+            icon: <FaTwitter className="w-5 h-5" />
+        },
+        { 
+            name: "Medium", 
+            path: process.env.NEXT_PUBLIC_MEDIUM_URL ?? "https://medium.com", 
+            icon: <FaMedium className="w-5 h-5" />
+        },
+    ];
+    
     return (
-        <div id="navbar" className={`z-50 w-full bg-neutral h-28 flex justify-between items-center ${jetBrainsMono.className} px-2 sm:px-36 fixed top-0`}>
-          <div className="dropdown dropdown-right block sm:hidden">
-            <div tabIndex={0} role="button" className="btn btn-ghost m-1"><RxHamburgerMenu size={24} /></div>
-            <ul tabIndex={0} className="dropdown-content flex flex-col gap-2 menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
-              <li><Link className="text-2xl" href="/">home</Link></li>
-              <li><Link className="text-2xl" href="/projects">projects</Link></li>
-              <li><Link className="text-2xl" href="/blog">blog</Link></li>
-            </ul>
-          </div>
-          <div id="pages-links" className="items-center gap-40 hidden sm:flex">
-            <Link className="text-2xl" href="/">home</Link>
-            <Link className="text-2xl" href="/projects">projects</Link>
-            <Link className="text-2xl" href="/blog">blog</Link>
-          </div>
-          <div className="dropdown dropdown-left block sm:hidden">
-            <div tabIndex={0} role="button" className="btn btn-ghost m-1"><IoShareSocialOutline size={24} /></div>
-            <ul tabIndex={0} className="dropdown-content flex flex-col gap-2 menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
-              <li><Link href={process.env.NEXT_PUBLIC_MEDIUM_URL??""} target="_blank"><Image src={"/Medium-Icon.svg"} alt={"Medium Icon"} width={24} height={24} /> Medium</Link></li>
-              <li><Link href={process.env.NEXT_PUBLIC_GITHUB_URL??""} target="_blank"><Image src={"/Github-Icon.svg"} alt={"GitHub Icon"} width={24} height={24} /> Github</Link></li>
-              <li><Link href={process.env.NEXT_PUBLIC_TWITTER_URL??""} target="_blank"><Image src={"/X-Icon.svg"} alt={"Twitter Icon"} width={24} height={24} /> X</Link></li>
-            </ul>
-          </div>
-          <div id="social-links" className="sm:flex items-center gap-24 hidden">
-            <Link href={process.env.NEXT_PUBLIC_MEDIUM_URL??""} target="_blank"><Image src={"/Medium-Icon.svg"} alt={"Medium Icon"} width={24} height={24} /></Link>
-            <Link href={process.env.NEXT_PUBLIC_GITHUB_URL??""} target="_blank"><Image src={"/Github-Icon.svg"} alt={"GitHub Icon"} width={24} height={24} /></Link>
-            <Link href={process.env.NEXT_PUBLIC_TWITTER_URL??""} target="_blank"><Image src={"/X-Icon.svg"} alt={"Twitter Icon"} width={24} height={24} /></Link>
-          </div>
-        </div>
-    )
+        <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-gray-900/80 backdrop-blur-md shadow-lg h-16" : "bg-transparent h-20"}`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+                <Link href="/" className="text-xl font-bold tracking-tight">
+                    <span className="bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent">
+                        Daniel Green
+                    </span>
+                </Link>
+                
+                {/* Desktop Navigation */}
+                <nav className="hidden md:flex items-center space-x-8">
+                    {navLinks.map((link) => (
+                        <Link 
+                            key={link.name}
+                            href={link.path}
+                            className="text-gray-300 hover:text-white transition-colors relative group py-2"
+                        >
+                            {link.name}
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-teal-400 transition-all duration-300 group-hover:w-full"></span>
+                        </Link>
+                    ))}
+                </nav>
+                
+                {/* Social Links - Desktop */}
+                <div className="hidden md:flex items-center space-x-4">
+                    {socialLinks.map((link) => (
+                        <Link 
+                            key={link.name}
+                            href={link.path}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
+                            aria-label={link.name}
+                        >
+                            {link.icon}
+                        </Link>
+                    ))}
+                </div>
+                
+                {/* Mobile Menu Button */}
+                <button 
+                    className="md:hidden text-gray-300 focus:outline-none"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    {isMenuOpen ? (
+                        <FiX className="w-6 h-6" />
+                    ) : (
+                        <FiMenu className="w-6 h-6" />
+                    )}
+                </button>
+            </div>
+            
+            {/* Mobile Menu */}
+            {isMenuOpen && (
+                <div className="md:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-md shadow-lg">
+                    <div className="px-4 py-6 space-y-4">
+                        <nav className="flex flex-col space-y-4">
+                            {navLinks.map((link) => (
+                                <Link 
+                                    key={link.name}
+                                    href={link.path}
+                                    className="text-gray-300 hover:text-white text-lg font-medium"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </nav>
+                        
+                        <div className="flex space-x-6 pt-4 border-t border-gray-800">
+                            {socialLinks.map((link) => (
+                                <Link 
+                                    key={link.name}
+                                    href={link.path}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-400 hover:text-white"
+                                    aria-label={link.name}
+                                >
+                                    {link.icon}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </header>
+    );
 }

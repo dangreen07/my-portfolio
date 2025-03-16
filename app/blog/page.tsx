@@ -2,11 +2,12 @@ import NavBar from "@/components/NavBar";
 import { client } from "@/sanity/client";
 import { SanityDocument } from "next-sanity";
 import Link from "next/link";
+import { FaCalendarAlt, FaAngleRight } from "react-icons/fa";
 
 const POSTS_QUERY = `*[
     _type == "post"
     && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, description}`;
 
 const options = { next: { revalidate: 30 } };
 
@@ -14,22 +15,89 @@ export default async function Blog() {
     const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY,  {}, options);
 
     return (
-    <main className="min-h-screen">
-        <NavBar />
-        <div className="h-28" />
-        <div className="container mx-auto max-w-3xl px-8 pb-8">
-            <h1 className="text-5xl text-center font-bold mb-8">Posts</h1>
-            <ul className="flex flex-col gap-y-4">
-                {posts.map((post) => (
-                    <li key={post._id} className="hover:underline">
-                        <Link href={`/blog/${post.slug.current}`}>
-                            <h2 className="text-xl font-semibold">{post.title}</h2>
-                            <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+        <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 to-black">
+            <NavBar />
+            
+            {/* Hero Section */}
+            <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden flex-grow">
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                    <div className="absolute w-[600px] h-[600px] -top-40 -left-40 bg-blue-500/15 rounded-full blur-3xl"></div>
+                    <div className="absolute w-[600px] h-[600px] top-1/2 left-1/2 bg-purple-500/10 rounded-full blur-3xl"></div>
+                    <div className="absolute w-[600px] h-[600px] -bottom-40 -right-40 bg-teal-500/15 rounded-full blur-3xl"></div>
+                </div>
+                
+                <div className="max-w-5xl mx-auto relative z-10">
+                    <div className="text-center mb-16">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                            <span className="heading-gradient">
+                                Blog Posts
+                            </span>
+                        </h1>
+                        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                            Thoughts, tutorials, and insights on technology and development
+                        </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 gap-6">
+                        {posts.map((post) => (
+                            <Link 
+                                key={post._id} 
+                                href={`/blog/${post.slug.current}`}
+                                className="group relative overflow-hidden bg-gray-800/50 rounded-xl border border-gray-700 p-6 transition-all duration-300 hover:bg-gray-800 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10"
+                            >
+                                <div className="flex flex-col">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <h2 className="text-2xl font-semibold text-white group-hover:text-blue-400 transition-colors">
+                                            {post.title}
+                                        </h2>
+                                        <FaAngleRight className="text-gray-400 group-hover:text-blue-400 transition-all transform group-hover:translate-x-1" />
+                                    </div>
+                                    
+                                    {post.description && (
+                                        <p className="text-gray-300 mb-4 line-clamp-2">
+                                            {post.description}
+                                        </p>
+                                    )}
+                                    
+                                    <div className="mt-auto pt-4 flex items-center text-gray-400 text-sm">
+                                        <FaCalendarAlt className="mr-2" />
+                                        <span>
+                                            {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric'
+                                            })}
+                                        </span>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            
+            {/* CTA Section */}
+            <section className="bg-transparent">
+                <div className="border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-900/10 to-teal-900/10">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <h2 className="text-2xl font-bold mb-6">Interested in my work?</h2>
+                        <div className="flex flex-wrap justify-center gap-4">
+                            <Link 
+                                href="/projects" 
+                                className="btn-white"
+                            >
+                                View My Projects
+                            </Link>
+                            <Link 
+                                href="/products" 
+                                className="btn-outline hover:text-white"
+                            >
+                                See My Products
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </main>
     );
 }
