@@ -1,43 +1,36 @@
 import Image from "next/image";
 import NavBar from "@/components/NavBar";
 import { FaExternalLinkAlt, FaCheckCircle } from "react-icons/fa";
+import { client } from "@/sanity/client";
+import { SanityDocument } from "next-sanity";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-// SaaS products
-const products = [
-  {
-    id: 1,
-    name: "Problem Pilot",
-    description: "Our AI analyzes Reddit discussions to uncover valuable SaaS opportunities. Find real software problems with validated pain points that users are actively discussing.",
-    image: "/problem-pilot.jpeg",
-    price: "$5/mo",
-    features: [
-      "Market-Validated Problems", 
-      "AI-Powered Analysis", 
-      "Instant Validation", 
-      "Reddit Community Analysis", 
-      "Pain Point Scoring"
-    ],
-    externalUrl: "https://www.problempilot.com/"
-  },
-  {
-    id: 2,
-    name: "Flourish Freelance",
-    description: "AI-Powered Freelancing Platform that transforms your freelance business with automated client acquisition. Automate outreach, schedule meetings effortlessly, and generate proposals with ease.",
-    image: "/flourish-freelance.jpeg",
-    price: "$29/mo",
-    features: [
-      "Smart Lead Generation", 
-      "Personalized Outreach", 
-      "Intelligent Proposals", 
-      "Unlimited Cold Emails", 
-      "AI Prospect Nurturing",
-      "Link Call Scheduling"
-    ],
-    externalUrl: "https://www.flourishfreelance.com/"
-  }
-];
+const PRODUCTS_QUERY = `*[
+  _type == "product"
+  && defined(slug.current)
+]|order(publishedAt desc){
+  _id, 
+  name, 
+  slug, 
+  description, 
+  image, 
+  price, 
+  features,
+  externalUrl
+}`;
 
-export default function ProductsPage() {
+const options = { next: { revalidate: 30 } };
+
+const { projectId, dataset } = client.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    : null;
+
+export default async function ProductsPage() {
+  const products = await client.fetch<SanityDocument[]>(PRODUCTS_QUERY, {}, options);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 relative">
       {/* Background gradients */}
@@ -68,7 +61,7 @@ export default function ProductsPage() {
             <div className="space-y-24">
               {products.map((product, index) => (
                 <div 
-                  key={product.id}
+                  key={product._id}
                   className="flex flex-col lg:flex-row gap-12 items-center"
                 >
                   <div className={`w-full lg:w-1/2 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
@@ -76,8 +69,8 @@ export default function ProductsPage() {
                       <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/30 to-teal-500/30 rounded-3xl blur-xl opacity-50"></div>
                       <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 p-2 rounded-2xl overflow-hidden">
                         <Image 
-                          src={product.image} 
-                          alt={product.name} 
+                          src={urlFor(product.image)?.url() || ''}
+                          alt={product.name}
                           width={800}
                           height={500}
                           className="rounded-xl object-cover w-full h-auto aspect-video"
@@ -99,7 +92,7 @@ export default function ProductsPage() {
                     <div className="space-y-4">
                       <h3 className="text-xl font-semibold text-white">Key Features:</h3>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {product.features.map((feature, idx) => (
+                        {product.features && product.features.map((feature: string, idx: number) => (
                           <li key={idx} className="flex items-start">
                             <FaCheckCircle className="mt-1 mr-3 text-teal-400 flex-shrink-0" />
                             <span className="text-gray-300">{feature}</span>
