@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Daniel Green's Portfolio",
@@ -82,6 +83,7 @@ export default function RootLayout({
           </div>
         </footer>
       </body>
+      <Analytics />
     </html>
   );
 }
