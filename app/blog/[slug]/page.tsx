@@ -25,7 +25,8 @@ type SanityImage = {
     _ref: string,
     _type: "reference"
   },
-  caption?: string
+  caption?: string,
+  alt?: string
 }
 
 type SanityCode = {
@@ -39,23 +40,31 @@ const myPortableTextComponents = {
   types: {
     image: ({ value }: { value: SanityImage }) => {
       const imageUrl = urlFor(value.asset)?.url();
+      const altText = value.alt || value.caption || "Blog image";
+      
       return (
-        <div className="my-8">
-          <div className="relative rounded-xl overflow-hidden shadow-xl max-w-4xl mx-auto">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/50 to-teal-500/50 rounded-xl blur opacity-30"></div>
-            <div className="relative">
-              <Image
-                src={imageUrl??""}
-                alt={"Blog image"}
-                className="aspect-video rounded-lg w-full"
-                width={1920}
-                height={1080}
-                priority
-              />
+        <div className="my-10">
+          <div className="relative rounded-xl overflow-hidden shadow-2xl max-w-4xl mx-auto group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/60 to-teal-500/60 rounded-xl blur opacity-40 group-hover:opacity-70 transition duration-300"></div>
+            <div className="relative overflow-hidden">
+              <div className="transition-transform duration-500">
+                <Image
+                  src={imageUrl ?? ""}
+                  alt={altText}
+                  className="w-full h-auto max-h-[80vh] rounded-lg object-contain"
+                  width={1920}
+                  height={1080}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
+                  priority
+                  quality={90}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiMxZDRlZDgiIG9mZnNldD0iMCUiLz48c3RvcCBzdG9wLWNvbG9yPSIjMjAzNjVmIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+PC9zdmc+"
+                />
+              </div>
             </div>
           </div>
           {value.caption && (
-            <figcaption className="mt-2 text-center text-sm text-gray-400 italic">
+            <figcaption className="mt-3 text-center text-sm text-gray-400 italic">
               {value.caption}
             </figcaption>
           )}
