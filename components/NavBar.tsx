@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import { FaGithub, FaTwitter, FaMedium } from "react-icons/fa";
+import Image from "next/image";
 
 export default function NavBar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -32,21 +32,31 @@ export default function NavBar() {
     ];
     
     const socialLinks = [
+        {
+            name: "Upwork",
+            path: process.env.NEXT_PUBLIC_UPWORK_URL ?? "https://www.upwork.com/",
+            icon: <Image src="/upwork-roundedsquare-1.svg" alt="Upwork" width={20} height={20} className="w-5 h-5" />
+        },
         { 
             name: "GitHub", 
             path: process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com", 
-            icon: <FaGithub className="w-5 h-5" />
+            icon: <Image src="/Github-Icon.svg" alt="GitHub" width={20} height={20} className="w-5 h-5" />
         },
         { 
             name: "Twitter", 
             path: process.env.NEXT_PUBLIC_TWITTER_URL ?? "https://twitter.com", 
-            icon: <FaTwitter className="w-5 h-5" />
+            icon: <Image src="/X-Icon.svg" alt="Twitter" width={20} height={20} className="w-5 h-5" />
         },
         { 
             name: "Medium", 
             path: process.env.NEXT_PUBLIC_MEDIUM_URL ?? "https://medium.com", 
-            icon: <FaMedium className="w-5 h-5" />
+            icon: <Image src="/Medium-Icon.svg" alt="Medium" width={20} height={20} className="w-5 h-5" />
         },
+        {
+            name: "LinkedIn",
+            path: process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://www.linkedin.com/",
+            icon: <div className="flex items-center justify-center bg-white rounded-md"><Image src="/LinkedIn-Icon.svg" alt="LinkedIn" width={20} height={20} className="w-5 h-5" /></div>
+        }
     ];
     
     return (

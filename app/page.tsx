@@ -1,10 +1,186 @@
 import Image from "next/image";
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
-import { FaArrowRight, FaGithub, FaCode, FaServer, FaLock, FaDatabase } from "react-icons/fa";
-import { SiReact, SiTailwindcss, SiRust, SiNextdotjs, SiFastify, SiOpenai, SiRedis, SiDocker, SiAmazon, SiGoogle, SiRemix } from "react-icons/si";
+import { FaArrowRight, FaGithub, FaCode, FaServer, FaLock, FaDatabase, FaCogs, FaLink, FaProjectDiagram } from "react-icons/fa";
+import { SiReact, SiTailwindcss, SiRust, SiNextdotjs, SiFastify, SiOpenai, SiRedis, SiDocker, SiAmazon, SiGoogle, SiRemix, SiPython, SiTypescript } from "react-icons/si";
 
 export default function Home() {
+  // Tech stack data configuration
+  const frontendTechs = [
+    {
+      name: "Next.js",
+      icon: SiNextdotjs,
+      description: "React framework for production",
+      color: "white",
+      hoverColor: "blue-500"
+    },
+    {
+      name: "Remix",
+      icon: SiRemix,
+      description: "Full stack web framework",
+      color: "purple-400",
+      hoverColor: "purple-500"
+    },
+    {
+      name: "Tailwind CSS",
+      icon: SiTailwindcss,
+      description: "Utility-first styling",
+      color: "blue-400",
+      hoverColor: "blue-400"
+    },
+    {
+      name: "React",
+      icon: SiReact,
+      description: "UI component library",
+      color: "blue-500",
+      hoverColor: "blue-500"
+    }
+  ];
+
+  const backendTechs = [
+    {
+      name: "Python",
+      icon: SiPython,
+      description: "Versatile programming language",
+      color: "yellow-400",
+      hoverColor: "yellow-400"
+    },
+    {
+      name: "TypeScript",
+      icon: SiTypescript,
+      description: "Type-safe JavaScript",
+      color: "blue-500",
+      hoverColor: "blue-500"
+    },
+    {
+      name: "Rust",
+      icon: SiRust,
+      description: "Performance-focused language",
+      color: "orange-500",
+      hoverColor: "orange-500"
+    },
+    {
+      name: "Fastify",
+      icon: SiFastify,
+      description: "Fast Node.js framework",
+      color: "white",
+      hoverColor: "white"
+    },
+    {
+      name: "Docker",
+      icon: SiDocker,
+      description: "Containerization platform",
+      color: "blue-400",
+      hoverColor: "blue-400"
+    },
+    {
+      name: "AWS",
+      icon: SiAmazon,
+      description: "Cloud infrastructure",
+      color: "yellow-500",
+      hoverColor: "yellow-500"
+    }
+  ];
+
+  const dataAiTechs = [
+    {
+      name: "OpenAI",
+      icon: SiOpenai,
+      description: "AI integration & LLMs",
+      color: "green-500",
+      hoverColor: "green-500"
+    },
+    {
+      name: "Langchain",
+      icon: FaLink,
+      description: "LLM application framework",
+      color: "green-400",
+      hoverColor: "green-400"
+    },
+    {
+      name: "LangGraph",
+      icon: FaProjectDiagram,
+      description: "AI workflow orchestration",
+      color: "purple-400",
+      hoverColor: "purple-400"
+    },
+    {
+      name: "n8n",
+      icon: FaCogs,
+      description: "Workflow automation",
+      color: "orange-400",
+      hoverColor: "orange-400"
+    },
+    {
+      name: "Neon",
+      icon: FaDatabase,
+      description: "Serverless Postgres",
+      color: "green-400",
+      hoverColor: "green-400"
+    },
+    {
+      name: "Redis",
+      icon: SiRedis,
+      description: "In-memory data store",
+      color: "red-500",
+      hoverColor: "red-500"
+    },
+    {
+      name: "Google API",
+      icon: SiGoogle,
+      description: "Third-party integrations",
+      color: "blue-400",
+      hoverColor: "blue-400"
+    }
+  ];
+
+  const authDevTechs = [
+    {
+      name: "Clerk",
+      icon: FaLock,
+      description: "Complete auth solution",
+      color: "amber-400",
+      hoverColor: "amber-400"
+    },
+    {
+      name: "Lucia Auth",
+      icon: FaLock,
+      description: "Authentication library",
+      color: "purple-400",
+      hoverColor: "purple-400"
+    },
+    {
+      name: "GitHub",
+      icon: FaGithub,
+      description: "Version control & CI/CD",
+      color: "white",
+      hoverColor: "white"
+    }
+  ];
+
+  // Tech interface
+  interface Tech {
+    name: string;
+    icon: React.ComponentType<{ className?: string }>;
+    description: string;
+    color: string;
+    hoverColor: string;
+  }
+
+  // Reusable tech card component
+  const TechCard = ({ tech }: { tech: Tech }) => {
+    const IconComponent = tech.icon;
+    return (
+      <div className={`group flex flex-col items-center p-8 bg-gradient-to-b from-gray-900/90 to-gray-800/50 rounded-3xl hover:from-gray-800/90 hover:to-gray-700/50 transition-all duration-300 border border-gray-800/50 hover:border-${tech.hoverColor}/40 hover:translate-y-[-6px] shadow-xl shadow-black/20 hover:shadow-${tech.hoverColor}/10 w-72`}>
+        <div className={`w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-${tech.hoverColor}/20 transition-all duration-300`}>
+          <IconComponent className={`w-10 h-10 text-${tech.color} group-hover:scale-110 transition-transform duration-300`} />
+        </div>
+        <h4 className="text-lg font-semibold mb-3">{tech.name}</h4>
+        <p className="text-sm text-gray-400 text-center leading-relaxed">{tech.description}</p>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-gray-900">
       <main className="flex flex-col flex-grow">
@@ -66,126 +242,74 @@ export default function Home() {
         </section>
         
         {/* Skills Section */}
-        <section className="py-28 bg-gray-950/80 border-t border-b border-gray-800/30">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+        <section className="py-32 bg-gray-950/80 border-t border-b border-gray-800/30 relative overflow-hidden">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute w-96 h-96 -top-48 -left-48 bg-blue-600/5 rounded-full blur-3xl"></div>
+            <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-teal-600/5 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
                   My Tech Stack
                 </span>
               </h2>
-              <p className="text-xl text-gray-300/80 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300/80 max-w-3xl mx-auto leading-relaxed">
                 A versatile toolkit I&apos;ve mastered to build everything from lightning-fast websites to AI-powered applications
               </p>
             </div>
             
-            <div className="mb-16">
-              <h3 className="text-xl font-semibold mb-8 text-center text-blue-400">Frontend & Frameworks</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-blue-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiNextdotjs className="w-12 h-12 text-white mb-4" />
-                  <h3 className="text-lg font-semibold">Next.js</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">React framework for production</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-blue-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiRemix className="w-12 h-12 text-purple-400 mb-4" />
-                  <h3 className="text-lg font-semibold">Remix</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Full stack web framework</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-blue-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiTailwindcss className="w-12 h-12 text-blue-400 mb-4" />
-                  <h3 className="text-lg font-semibold">Tailwind CSS</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Utility-first styling</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-blue-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiReact className="w-12 h-12 text-blue-500 mb-4" />
-                  <h3 className="text-lg font-semibold">React</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">UI component library</p>
-                </div>
+            {/* Frontend & Frameworks */}
+            <div className="mb-20">
+              <div className="text-center mb-12">
+                <h3 className="text-2xl font-bold mb-4 text-blue-400">Frontend & Frameworks</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto rounded-full"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
+                {frontendTechs.map((tech, index) => (
+                  <TechCard key={index} tech={tech} />
+                ))}
               </div>
             </div>
             
-            <div className="mb-16">
-              <h3 className="text-xl font-semibold mb-8 text-center text-teal-400">Backend & Infrastructure</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-teal-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiRust className="w-12 h-12 text-orange-500 mb-4" />
-                  <h3 className="text-lg font-semibold">Rust</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Performance-focused language</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-teal-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiFastify className="w-12 h-12 text-white mb-4" />
-                  <h3 className="text-lg font-semibold">Fastify</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Fast Node.js framework</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-teal-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiDocker className="w-12 h-12 text-blue-400 mb-4" />
-                  <h3 className="text-lg font-semibold">Docker</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Containerization platform</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-teal-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiAmazon className="w-12 h-12 text-yellow-500 mb-4" />
-                  <h3 className="text-lg font-semibold">AWS</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Cloud infrastructure</p>
-                </div>
+            {/* Backend & Infrastructure */}
+            <div className="mb-20">
+              <div className="text-center mb-12">
+                <h3 className="text-2xl font-bold mb-4 text-teal-400">Backend & Infrastructure</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-teal-400 to-teal-600 mx-auto rounded-full"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-6 max-w-7xl mx-auto">
+                {backendTechs.map((tech, index) => (
+                  <TechCard key={index} tech={tech} />
+                ))}
               </div>
             </div>
             
-            <div className="mb-16">
-              <h3 className="text-xl font-semibold mb-8 text-center text-purple-400">Data & AI</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-purple-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiOpenai className="w-12 h-12 text-green-500 mb-4" />
-                  <h3 className="text-lg font-semibold">OpenAI</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">AI integration & LLMs</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-purple-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <FaDatabase className="w-12 h-12 text-green-400 mb-4" />
-                  <h3 className="text-lg font-semibold">Neon</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Serverless Postgres</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-purple-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiRedis className="w-12 h-12 text-red-500 mb-4" />
-                  <h3 className="text-lg font-semibold">Redis</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">In-memory data store</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-purple-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <SiGoogle className="w-12 h-12 text-blue-400 mb-4" />
-                  <h3 className="text-lg font-semibold">Google API</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Third-party integrations</p>
-                </div>
+            {/* Data & AI */}
+            <div className="mb-20">
+              <div className="text-center mb-12">
+                <h3 className="text-2xl font-bold mb-4 text-purple-400">Data & AI</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-purple-400 to-purple-600 mx-auto rounded-full"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-6 max-w-7xl mx-auto">
+                {dataAiTechs.map((tech, index) => (
+                  <TechCard key={index} tech={tech} />
+                ))}
               </div>
             </div>
 
+            {/* Auth & Development */}
             <div>
-              <h3 className="text-xl font-semibold mb-8 text-center text-amber-400">Auth & Development</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-amber-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <FaLock className="w-12 h-12 text-amber-400 mb-4" />
-                  <h3 className="text-lg font-semibold">Clerk</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Complete auth solution</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-amber-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <FaLock className="w-12 h-12 text-purple-400 mb-4" />
-                  <h3 className="text-lg font-semibold">Lucia Auth</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Authentication library</p>
-                </div>
-                
-                <div className="flex flex-col items-center p-6 bg-gray-900/80 rounded-2xl hover:bg-gray-800/80 transition-all border border-gray-800/50 hover:border-amber-500/30 hover:translate-y-[-4px] shadow-lg shadow-black/20">
-                  <FaGithub className="w-12 h-12 text-white mb-4" />
-                  <h3 className="text-lg font-semibold">GitHub</h3>
-                  <p className="text-xs text-gray-400 text-center mt-2">Version control & CI/CD</p>
-                </div>
+              <div className="text-center mb-12">
+                <h3 className="text-2xl font-bold mb-4 text-amber-400">Auth & Development</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto rounded-full"></div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
+                {authDevTechs.map((tech, index) => (
+                  <TechCard key={index} tech={tech} />
+                ))}
               </div>
             </div>
           </div>
