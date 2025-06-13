@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
-import { FaArrowRight, FaGithub, FaCode, FaServer, FaLock, FaDatabase, FaCogs, FaLink, FaProjectDiagram } from "react-icons/fa";
-import { SiReact, SiTailwindcss, SiRust, SiNextdotjs, SiFastify, SiOpenai, SiRedis, SiDocker, SiAmazon, SiGoogle, SiRemix, SiPython, SiTypescript } from "react-icons/si";
+import { FaArrowRight, FaGithub, FaCode, FaServer, FaDatabase } from "react-icons/fa";
+import { SiReact, SiTailwindcss, SiRust, SiNextdotjs, SiFastify, SiOpenai, SiRedis, SiDocker, SiAmazon, SiGoogle, SiRemix, SiPython, SiTypescript, SiSanity, SiPayloadcms, SiN8N, SiLangchain, SiClerk, SiLucia } from "react-icons/si";
 
 export default function Home() {
   // Tech stack data configuration
@@ -67,6 +67,20 @@ export default function Home() {
       hoverColor: "white"
     },
     {
+      name: "Sanity",
+      icon: SiSanity,
+      description: "Headless CMS solution",
+      color: "red-400",
+      hoverColor: "red-400"
+    },
+    {
+      name: "PayloadCMS",
+      icon: SiPayloadcms,
+      description: "Modern headless CMS",
+      color: "indigo-400",
+      hoverColor: "indigo-400"
+    },
+    {
       name: "Docker",
       icon: SiDocker,
       description: "Containerization platform",
@@ -92,21 +106,14 @@ export default function Home() {
     },
     {
       name: "Langchain",
-      icon: FaLink,
+      icon: SiLangchain,
       description: "LLM application framework",
       color: "green-400",
       hoverColor: "green-400"
     },
     {
-      name: "LangGraph",
-      icon: FaProjectDiagram,
-      description: "AI workflow orchestration",
-      color: "purple-400",
-      hoverColor: "purple-400"
-    },
-    {
       name: "n8n",
-      icon: FaCogs,
+      icon: SiN8N,
       description: "Workflow automation",
       color: "orange-400",
       hoverColor: "orange-400"
@@ -137,14 +144,14 @@ export default function Home() {
   const authDevTechs = [
     {
       name: "Clerk",
-      icon: FaLock,
+      icon: SiClerk,
       description: "Complete auth solution",
       color: "amber-400",
       hoverColor: "amber-400"
     },
     {
       name: "Lucia Auth",
-      icon: FaLock,
+      icon: SiLucia,
       description: "Authentication library",
       color: "purple-400",
       hoverColor: "purple-400"

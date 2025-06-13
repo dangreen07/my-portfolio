@@ -41,7 +41,7 @@ export default async function ProjectsPage() {
                         </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {projects.map((project) => (
+                            {projects.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime()).map((project) => (
                                 <Link 
                                     key={project._id} 
                                     href={`/projects/${project.slug.current}`}

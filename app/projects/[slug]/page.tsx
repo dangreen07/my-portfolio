@@ -73,7 +73,8 @@ export default async function ProjectPage({
                             {project.github_page && (
                                 <Link 
                                     href={project.github_page} 
-                                    target="_blank" 
+                                    target="_blank"
+                                    rel="noopener noreferrer nofollow"
                                     className="px-6 py-3 bg-gray-800/80 text-white rounded-xl font-medium border border-gray-700/50 hover:bg-gray-700 hover:translate-y-[-2px] transition-all flex items-center gap-2 shadow-lg"
                                 >
                                     <FaGithub className="text-xl" />
@@ -84,7 +85,7 @@ export default async function ProjectPage({
                             {project.hosting_site && project.project_icon && (
                                 <Link 
                                     href={project.hosting_site} 
-                                    target="_blank" 
+                                    target="_blank"
                                     className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-medium flex items-center gap-2 hover:translate-y-[-2px] transition-all shadow-lg shadow-blue-500/20"
                                 >
                                     {urlFor(project.project_icon)?.url() && (
@@ -145,7 +146,8 @@ export default async function ProjectPage({
                                             <span className="inline-block w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3"></span>
                                             <Link 
                                                 href={website} 
-                                                target="_blank" 
+                                                target="_blank"
+                                                rel="noopener noreferrer nofollow"
                                                 className="text-gray-300 hover:text-blue-400 transition-colors break-all"
                                             >
                                                 {website}
