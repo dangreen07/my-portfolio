@@ -159,7 +159,7 @@ Access the Sanity Studio at `/studio` to manage:
 ## 👨‍💻 Author
 
 **Daniel Green**
-- Portfolio: [https://www.mrgreeny.dev]
+- Portfolio: (mrgreeny.dev)[https://www.mrgreeny.dev]
 
 ## 🙏 Acknowledgments
 
