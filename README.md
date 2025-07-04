@@ -142,29 +142,6 @@ Access the Sanity Studio at `/studio` to manage:
 - Edit schema types in `sanity/schemaTypes/`
 - Customize the Studio structure in `sanity/structure.ts`
 
-## 🚀 Deployment
-
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Add environment variables in Vercel dashboard
-4. Deploy automatically on every push
-
-### Other Platforms
-The portfolio can be deployed on any platform that supports Next.js:
-- **Netlify** - Add build command: `npm run build`
-- **Railway** - Automatic deployment from GitHub
-- **AWS Amplify** - Connect GitHub repository
-- **Digital Ocean** - Use App Platform
-
-## 📈 Performance
-
-- **Lighthouse Score**: 95+ across all metrics
-- **Core Web Vitals**: Optimized for excellent user experience
-- **Image Optimization**: Next.js Image component with WebP support
-- **Code Splitting**: Automatic route-based code splitting
-- **Font Optimization**: Self-hosted fonts with proper loading
-
 ## 🔧 Environment Variables
 
 | Variable | Description | Required |
@@ -179,24 +156,10 @@ The portfolio can be deployed on any platform that supports Next.js:
 | `NEXT_PUBLIC_MEDIUM_URL` | Medium profile URL | No |
 | `NEXT_PUBLIC_UPWORK_URL` | Upwork profile URL | No |
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Author
 
 **Daniel Green**
-- Portfolio: [Your Portfolio URL]
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourusername)
+- Portfolio: [https://www.mrgreeny.dev]
 
 ## 🙏 Acknowledgments
 
