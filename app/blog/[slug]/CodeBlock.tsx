@@ -6,47 +6,45 @@ import { vs2015 } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 export default function CodeBlock({ code, language }: { code: string; language: string }) {
   const [copied, setCopied] = useState(false);
-  
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-  
+
   return (
-    <div className="overflow-hidden rounded-xl relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/30 to-teal-500/30 rounded-xl blur opacity-30 pointer-events-none"></div>
-      
-      <div className="flex items-center justify-between bg-gray-800/90 px-4 py-2 border-b border-gray-700/50 relative z-10">
+    <div className="overflow-hidden bg-gray-800 border border-gray-700 rounded-lg">
+      <div className="flex items-center justify-between bg-gray-900 px-4 py-2 border-b border-gray-700">
         <span className="text-sm font-mono text-gray-300">
           {language || 'code'}
         </span>
-        <button 
+        <button
           onClick={copyToClipboard}
-          className="text-xs font-medium px-2 py-1 rounded bg-gray-700 hover:bg-gray-600 text-gray-200 transition-colors duration-200 z-20"
+          className="text-xs font-medium px-2 py-1 bg-gray-700 hover:bg-gray-600 text-gray-200 transition-colors duration-200 rounded"
           aria-label="Copy code to clipboard"
           type="button"
         >
           {copied ? 'Copied!' : 'Copy'}
         </button>
       </div>
-      <div className="relative z-10">
+      <div>
         <pre className="p-0 m-0 bg-transparent">
           <code className="selection-enabled">
-            <SyntaxHighlighter 
-              language={language || 'text'} 
+            <SyntaxHighlighter
+              language={language || 'text'}
               style={vs2015}
               useInlineStyles={true}
               className="syntax-highlighter"
-              PreTag={({children}) => <>{children}</>}
-              CodeTag={({children}) => <>{children}</>}
+              PreTag={({ children }) => <>{children}</>}
+              CodeTag={({ children }) => <>{children}</>}
               customStyle={{
-                background: 'rgba(31, 41, 55, 0.95)',
+                background: '#1f2937',
                 fontSize: '0.95rem',
                 lineHeight: 1.6,
                 cursor: 'text',
                 padding: '1.5rem',
-                borderRadius: '0 0 0.75rem 0.75rem',
+                borderRadius: '0',
                 userSelect: 'text',
                 WebkitUserSelect: 'text',
                 MozUserSelect: 'text',

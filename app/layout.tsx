@@ -37,7 +37,7 @@ export default function RootLayout({
                   Building exceptional digital experiences with modern technologies and a focus on performance, accessibility, and user experience.
                 </p>
               </div>
-              
+
               {/* Quick Links */}
               <div>
                 <h3 className="text-lg font-semibold mb-5">Quick Links</h3>
@@ -46,19 +46,6 @@ export default function RootLayout({
                   <li><Link href="/projects" className="text-gray-400 hover:text-white transition-colors">Projects</Link></li>
                   <li><Link href="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link></li>
                   <li><Link href="/products" className="text-gray-400 hover:text-white transition-colors">Products</Link></li>
-                </ul>
-              </div>
-            </div>
-            
-            {/* Bottom Bar */}
-            <div className="pt-8 border-t border-gray-800/30 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-500 text-sm">
-                © {new Date().getFullYear()} Daniel Green. All rights reserved.
-              </p>
-              <div className="mt-4 md:mt-0">
-                <ul className="flex space-x-6 text-sm">
-                  <li><a href="#" className="text-gray-500 hover:text-white transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="text-gray-500 hover:text-white transition-colors">Terms of Service</a></li>
                 </ul>
               </div>
             </div>
