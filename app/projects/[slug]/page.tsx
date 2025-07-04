@@ -98,7 +98,7 @@ export default async function ProjectPage({
                         Project Description
                     </h2>
 
-                    <div className="prose prose-invert prose-lg max-w-none 
+                    <div className="prose prose-invert prose-lg max-w-none overflow-visible
                       prose-headings:font-bold prose-headings:text-white 
                       prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-4
                       prose-h2:text-2xl prose-h2:mt-6 prose-h2:mb-3
@@ -110,8 +110,8 @@ export default async function ProjectPage({
                       prose-code:bg-gray-800 prose-code:text-blue-300 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:before:hidden prose-code:after:hidden
                       prose-pre:bg-transparent prose-pre:p-0 prose-pre:my-6
                       prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-4 prose-blockquote:py-1 prose-blockquote:text-gray-300 prose-blockquote:italic prose-blockquote:bg-gray-800/30 prose-blockquote:my-6
-                      prose-ul:my-4 prose-ul:pl-1 prose-li:my-2 prose-li:text-gray-300
-                      prose-ol:my-4 prose-ol:pl-1">
+                      prose-ul:my-4 prose-ul:pl-6 prose-li:my-2 prose-li:text-gray-300 prose-li:break-words
+                      prose-ol:my-4 prose-ol:pl-6">
                         {Array.isArray(project.project_description) && (
                             <PortableText value={project.project_description} />
                         )}
@@ -128,10 +128,10 @@ export default async function ProjectPage({
                                 Related Websites
                             </h3>
 
-                            <ul className="space-y-3">
+                            <ul className="space-y-3 pl-6">
                                 {project.related_websites.map((website: string, index: number) => (
-                                    <li key={index} className="flex items-start">
-                                        <span className="inline-block w-2 h-2 bg-blue-400 mt-2 mr-3 flex-shrink-0"></span>
+                                    <li key={index} className="flex items-start relative">
+                                        <span className="absolute -left-4 inline-block w-2 h-2 bg-blue-400 mt-2 flex-shrink-0"></span>
                                         <Link
                                             href={website}
                                             target="_blank"
@@ -154,7 +154,7 @@ export default async function ProjectPage({
                                 Related Blog Posts
                             </h3>
 
-                            <ul className="space-y-3">
+                            <ul className="space-y-3 pl-6">
                                 {project.related_blog_posts.map((post: {
                                     slug: {
                                         _type: string;
@@ -162,8 +162,8 @@ export default async function ProjectPage({
                                     }
                                     title: string;
                                 }, index: number) => (
-                                    <li key={index} className="flex items-start">
-                                        <span className="inline-block w-2 h-2 bg-purple-400 mt-2 mr-3 flex-shrink-0"></span>
+                                    <li key={index} className="flex items-start relative">
+                                        <span className="absolute -left-4 inline-block w-2 h-2 bg-purple-400 mt-2 flex-shrink-0"></span>
                                         <Link
                                             href={`/blog/${post.slug.current}`}
                                             className="text-gray-300 hover:text-purple-400 transition-colors"
