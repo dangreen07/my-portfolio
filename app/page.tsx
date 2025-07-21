@@ -1,6 +1,6 @@
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
-import { FaArrowRight, FaGithub, FaCode, FaServer, FaDatabase, FaCheckCircle, FaStar, FaUsers } from "react-icons/fa";
+import { FaArrowRight, FaGithub, FaCode, FaServer, FaDatabase } from "react-icons/fa";
 import { SiReact, SiTailwindcss, SiRust, SiNextdotjs, SiFastify, SiOpenai, SiRedis, SiDocker, SiAmazon, SiGoogle, SiRemix, SiPython, SiTypescript, SiSanity, SiPayloadcms, SiN8N, SiLangchain, SiClerk, SiLucia } from "react-icons/si";
 
 export default function Home() {
@@ -359,8 +359,8 @@ export default function Home() {
               Ready to Build Something Amazing?
             </h2>
             <p className="text-body-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-              Let's discuss your project and create a solution that exceeds your expectations. 
-              From concept to deployment, I'll guide you every step of the way.
+              Let&apos;s discuss your project and create a solution that exceeds your expectations. 
+              From concept to deployment, I&apos;ll guide you every step of the way.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Link
