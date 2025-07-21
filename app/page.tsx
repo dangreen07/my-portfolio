@@ -211,7 +211,7 @@ export default function Home() {
               I transform ideas into powerful digital solutions. Specializing in 
               <span className="text-blue-400 font-medium"> modern web applications</span>, 
               <span className="text-green-400 font-medium"> AI-powered systems</span>, and 
-              <span className="text-purple-400 font-medium"> scalable cloud infrastructure</span> 
+              <span className="text-purple-400 font-medium"> scalable cloud infrastructure </span> 
               that drive business growth.
             </p>
             
