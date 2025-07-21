@@ -60,10 +60,10 @@ export default function NavBar() {
     ];
     
     return (
-        <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-gray-900/80 backdrop-blur-md shadow-lg h-16" : "bg-transparent h-20"}`}>
+        <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-gray-900/90 backdrop-blur-xl shadow-xl border-b border-gray-800/50 h-16" : "bg-transparent h-20"}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
                 <Link href="/" className="text-xl font-bold tracking-tight">
-                    <span className="bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-cyan-300 transition-all duration-300">
                         Daniel Green
                     </span>
                 </Link>
@@ -74,10 +74,10 @@ export default function NavBar() {
                         <Link 
                             key={link.name}
                             href={link.path}
-                            className="text-gray-300 hover:text-white transition-colors relative group py-2"
+                            className="text-gray-300 hover:text-white transition-all duration-300 relative group py-2 px-3 rounded-lg hover:bg-white/5"
                         >
                             {link.name}
-                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-teal-400 transition-all duration-300 group-hover:w-full"></span>
+                            <span className="absolute bottom-0 left-3 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]"></span>
                         </Link>
                     ))}
                 </nav>
@@ -90,7 +90,7 @@ export default function NavBar() {
                             href={link.path}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
+                            className="text-gray-400 hover:text-white transition-all duration-300 p-2 rounded-full hover:bg-white/10 hover:scale-110"
                             aria-label={link.name}
                         >
                             {link.icon}
@@ -114,14 +114,14 @@ export default function NavBar() {
             
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-md shadow-lg">
+                <div className="md:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-xl shadow-xl border-b border-gray-800/50">
                     <div className="px-4 py-6 space-y-4">
                         <nav className="flex flex-col space-y-4">
                             {navLinks.map((link) => (
                                 <Link 
                                     key={link.name}
                                     href={link.path}
-                                    className="text-gray-300 hover:text-white text-lg font-medium"
+                                    className="text-gray-300 hover:text-white text-lg font-medium transition-colors duration-300 py-2 px-3 rounded-lg hover:bg-white/5"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     {link.name}
@@ -136,7 +136,7 @@ export default function NavBar() {
                                     href={link.path}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-400 hover:text-white"
+                                    className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110"
                                     aria-label={link.name}
                                 >
                                     {link.icon}
