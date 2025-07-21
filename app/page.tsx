@@ -201,22 +201,6 @@ export default function Home() {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
           
           <div className="relative max-w-6xl mx-auto px-6 text-center">
-            {/* Trust Indicators */}
-            <div className="flex justify-center items-center gap-8 mb-8 text-sm text-gray-400 animate-fade-in-down">
-              <div className="flex items-center gap-2">
-                <FaStar className="text-yellow-400" />
-                <span>5+ Years Experience</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaUsers className="text-blue-400" />
-                <span>50+ Projects Delivered</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaCheckCircle className="text-green-400" />
-                <span>100% Client Satisfaction</span>
-              </div>
-            </div>
-
             <h1 className="text-display-xl md:text-display-xl font-bold mb-8 animate-fade-in-up">
               <span className="gradient-text-primary">Full Stack Developer</span>
               <br />
@@ -238,24 +222,6 @@ export default function Home() {
               >
                 View My Work <FaArrowRight className="inline ml-2" />
               </Link>
-              <Link
-                href="#contact"
-                className="btn-outline text-lg px-8 py-4"
-              >
-                Let's Talk
-              </Link>
-            </div>
-            
-            {/* Social Proof */}
-            <div className="mt-16 animate-fade-in-up" style={{animationDelay: '0.6s'}}>
-              <p className="text-sm text-gray-500 mb-6">Trusted by companies worldwide</p>
-              <div className="flex justify-center items-center gap-8 opacity-50">
-                <SiNextdotjs className="w-8 h-8" />
-                <SiReact className="w-8 h-8" />
-                <SiOpenai className="w-8 h-8" />
-                <SiAmazon className="w-8 h-8" />
-                <SiGoogle className="w-8 h-8" />
-              </div>
             </div>
           </div>
         </section>
@@ -336,36 +302,51 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="card-secondary group">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-8 rounded-2xl shadow-2xl group-hover:scale-110 group-hover:shadow-blue-500/25 transition-all duration-300">
                   <FaCode className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-white">Web Development</h3>
-                <p className="text-gray-300">
-                  Cutting-edge web applications with exceptional performance, accessibility, and user experience. 
-                  Built with modern frameworks and best practices.
+                <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-blue-400 transition-colors">Web Development</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Modern, responsive web applications built with cutting-edge frameworks like Next.js and React. 
+                  Focused on performance, accessibility, and exceptional user experiences that drive results.
                 </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full">React</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full">Next.js</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full">TypeScript</span>
+                </div>
               </div>
 
               <div className="card-secondary group">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-8 rounded-2xl shadow-2xl group-hover:scale-110 group-hover:shadow-green-500/25 transition-all duration-300">
                   <FaServer className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-white">Backend Systems</h3>
-                <p className="text-gray-300">
-                  Robust, scalable backend architectures with secure APIs, efficient databases, 
-                  and seamless cloud integration for enterprise-grade solutions.
+                <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-green-400 transition-colors">Backend Systems</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Scalable server architectures with secure APIs, optimized databases, and cloud infrastructure. 
+                  Built for reliability, performance, and seamless integration with modern deployment practices.
                 </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-green-500/20 text-green-300 text-sm rounded-full">Node.js</span>
+                  <span className="px-3 py-1 bg-green-500/20 text-green-300 text-sm rounded-full">Python</span>
+                  <span className="px-3 py-1 bg-green-500/20 text-green-300 text-sm rounded-full">AWS</span>
+                </div>
               </div>
 
               <div className="card-secondary group">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mb-6 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mb-8 rounded-2xl shadow-2xl group-hover:scale-110 group-hover:shadow-purple-500/25 transition-all duration-300">
                   <SiOpenai className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-white">AI Integration</h3>
-                <p className="text-gray-300">
-                  Intelligent automation and AI-powered features that transform business processes. 
-                  Custom solutions with machine learning and natural language processing.
+                <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-purple-400 transition-colors">AI Integration</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Smart automation and AI-powered features using OpenAI, LangChain, and custom ML models. 
+                  Transform business processes with intelligent solutions that learn and adapt.
                 </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full">OpenAI</span>
+                  <span className="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full">LangChain</span>
+                  <span className="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full">ML</span>
+                </div>
               </div>
             </div>
           </div>

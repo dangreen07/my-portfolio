@@ -61,6 +61,7 @@ export default function NavBar() {
     
     return (
         <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-gray-900/90 backdrop-blur-xl shadow-xl border-b border-gray-800/50 h-16" : "bg-transparent h-20"}`}>
+        <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-gray-900/90 backdrop-blur-xl shadow-xl border-b border-gray-800/50 h-16" : "bg-gray-900/60 backdrop-blur-md h-20"}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
                 <Link href="/" className="text-xl font-bold tracking-tight">
                     <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-cyan-300 transition-all duration-300">
