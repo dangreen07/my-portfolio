@@ -1,6 +1,6 @@
 import NavBar from "@/components/NavBar";
 import { client } from "@/sanity/client";
-import { SanityDocument } from "next-sanity";
+import { SanityDocument } from "@sanity/client";
 import Link from "next/link";
 import { FaCalendarAlt, FaAngleRight } from "react-icons/fa";
 import { urlFor } from "@/sanity/lib/image";

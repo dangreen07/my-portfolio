@@ -1,5 +1,5 @@
 import { client } from "@/sanity/client";
-import { SanityDocument } from "next-sanity";
+import { SanityDocument } from "@sanity/client";
 import NavBar from "@/components/NavBar";
 import Link from "next/link";
 import { PortableText } from '@portabletext/react';
