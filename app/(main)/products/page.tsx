@@ -2,7 +2,7 @@ import Image from "next/image";
 import NavBar from "@/components/NavBar";
 import { FaExternalLinkAlt, FaCheckCircle } from "react-icons/fa";
 import { client } from "@/sanity/client";
-import { SanityDocument } from "next-sanity";
+import { SanityDocument } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
