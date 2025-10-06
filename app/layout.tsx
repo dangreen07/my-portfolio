@@ -4,20 +4,20 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  title: "Daniel Green",
+  title: "Daniel Green - Software Engineer & Physics Student",
   description:
-    "Software engineer and Physics BSc building reliable web apps and data tools.",
+    "Portfolio of Daniel Green - Software engineer and Physics BSc student. Building web applications with Next.js, TypeScript, React, and exploring Rust. View projects and technical writings.",
   openGraph: {
-    title: "Daniel Green",
+    title: "Daniel Green - Software Engineer & Physics Student",
     description:
-      "Software engineer and Physics BSc building reliable web apps and data tools.",
-    siteName: "Daniel Green",
+      "Portfolio of Daniel Green - Software engineer and Physics BSc student. Building web applications with Next.js, TypeScript, React, and exploring Rust. View projects and technical writings.",
+    siteName: "Daniel Green Portfolio",
     images: [
       {
         url: "/favicon.ico",
         width: 64,
         height: 64,
-        alt: "DG site icon",
+        alt: "Daniel Green Portfolio",
       },
     ],
     locale: "en_GB",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Daniel Green",
+    title: "Daniel Green - Software Engineer & Physics Student",
     description:
-      "Software engineer and Physics BSc building reliable web apps and data tools.",
+      "Portfolio of Daniel Green - Software engineer and Physics BSc student. Building web applications with Next.js, TypeScript, React, and exploring Rust.",
     images: ["/favicon.ico"],
   },
   icons: {

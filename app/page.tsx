@@ -5,8 +5,6 @@ export default function Home() {
   // Public env vars for external links (rendered server-side, safe for client)
   const LINKEDIN_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL || "#";
   const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL || "#";
-  const RESUME_URL = process.env.NEXT_PUBLIC_RESUME_URL || "";
-  const EMAIL = process.env.NEXT_PUBLIC_EMAIL || "";
 
   const btnBase =
     "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14] transition-colors";
@@ -27,30 +25,31 @@ export default function Home() {
         {/* Hero */}
         <section
           aria-labelledby="hero-title"
-          className="px-6 pt-16 md:pt-24 pb-12 md:pb-16"
+          className="px-6 pt-20 md:pt-28 pb-16 md:pb-20"
         >
-          <div className="mx-auto max-w-3xl text-center">
-            <h1
-              id="hero-title"
-              className="text-4xl md:text-5xl font-semibold tracking-tight text-[#E6E6E6]"
-            >
-              Daniel Green
-            </h1>
-            <p className="mt-4 md:mt-6 text-base md:text-lg leading-relaxed text-[#B3B9C4]">
-              I&apos;m a software engineer and Physics BSc. I build fast,
-              reliable web apps and data tools. Open to internships and junior
-              roles in software or quantitative work.
-            </p>
-
-            <div className="mt-8 md:mt-10 flex flex-wrap justify-center gap-3 md:gap-4">
-              <a
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={btnPrimary}
-                aria-label="Open LinkedIn profile in a new tab"
+          <div className="mx-auto max-w-4xl">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1
+                id="hero-title"
+                className="text-5xl md:text-6xl font-bold tracking-tight text-[#E6E6E6] mb-6"
               >
-                LinkedIn
+                Daniel Green
+              </h1>
+              <p className="text-xl md:text-2xl leading-relaxed text-[#B3B9C4] mb-8 font-medium">
+                Software engineer and Physics BSc student
+              </p>
+              <p className="text-lg md:text-xl text-[#94A3B8] leading-relaxed max-w-2xl mx-auto">
+                I build web applications with Next.js, TypeScript, and React. Currently learning Rust and exploring quantitative analysis.
+              </p>
+            </div>
+
+            <div className="mt-12 md:mt-16 flex flex-wrap justify-center gap-4 md:gap-6">
+              <a
+                href="/projects"
+                className={btnPrimary}
+                aria-label="View my projects"
+              >
+                View Projects
               </a>
               <a
                 href={GITHUB_URL}
@@ -61,26 +60,15 @@ export default function Home() {
               >
                 GitHub
               </a>
-              {RESUME_URL ? (
-                <a
-                  href={RESUME_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={btnSecondary}
-                  aria-label="Open resume in a new tab"
-                >
-                  Resume
-                </a>
-              ) : null}
-              {EMAIL ? (
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className={btnSecondary}
-                  aria-label="Send me an email"
-                >
-                  Email
-                </a>
-              ) : null}
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={btnSecondary}
+                aria-label="Open LinkedIn profile in a new tab"
+              >
+                LinkedIn
+              </a>
             </div>
           </div>
         </section>
@@ -88,82 +76,81 @@ export default function Home() {
         {/* About */}
         <section
           aria-labelledby="about-title"
-          className="px-6 py-12 md:py-16 border-t border-white/10"
+          className="px-6 py-16 md:py-20 border-t border-white/10"
         >
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-4xl">
             <h2
               id="about-title"
-              className="text-xl md:text-2xl font-semibold text-[#E6E6E6]"
+              className="text-2xl md:text-3xl font-bold text-[#E6E6E6] mb-6"
             >
               About
             </h2>
-            <p className="mt-4 text-base md:text-lg text-[#C7CCD6] leading-relaxed">
-              I like turning rough ideas into simple, fast software, then
-              improving it with measurements. I work mostly with
-              TypeScript/React/Next.js and Python, and I&apos;m learning Rust. I care about
-              clear code, good docs, and small, safe changes.
-            </p>
-
-            {/* Compact skills as readable tags */}
-            <ul
-              role="list"
-              className="mt-6 flex flex-wrap gap-2 md:gap-3 text-sm"
-              aria-label="Key tools and skills"
-            >
-              {[
-                "Next.js",
-                "React",
-                "TypeScript",
-                "Python",
-                "Rust",
-                "SQL",
-                "Postgres",
-                "Docker",
-                "AWS",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[#D9DEE6]"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              <div>
+                <p className="text-lg md:text-xl text-[#B3B9C4] leading-relaxed mb-6">
+                  I&apos;m a software engineer and Physics BSc student with a passion for building reliable web applications. My work focuses on creating clean, maintainable code that solves real problems.
+                </p>
+                <p className="text-base md:text-lg text-[#94A3B8] leading-relaxed">
+                  I enjoy exploring the intersection of quantitative analysis and software engineering, using data-driven approaches to build better applications.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg md:text-xl font-semibold text-[#E6E6E6] mb-4">
+                  Technologies I work with
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    "Next.js",
+                    "React",
+                    "TypeScript",
+                    "Python",
+                    "Rust",
+                    "SQL",
+                    "Postgres",
+                    "Docker",
+                    "AWS",
+                    "Tailwind CSS",
+                    "Node.js",
+                    "Git"
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="text-sm text-[#C7CCD6] py-2 px-3 rounded-md bg-white/5 border border-white/10"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Projects */}
         <section
           aria-labelledby="projects-title"
-          className="px-6 py-12 md:py-16 border-t border-white/10"
+          className="px-6 py-16 md:py-20 border-t border-white/10"
         >
           <div className="mx-auto max-w-4xl">
-            <div className="max-w-3xl">
+            <div className="max-w-3xl mx-auto text-center">
               <h2
                 id="projects-title"
-                className="text-xl md:text-2xl font-semibold text-[#E6E6E6]"
+                className="text-2xl md:text-3xl font-bold text-[#E6E6E6] mb-6"
               >
-                Projects
+                Selected Projects
               </h2>
-              <p className="mt-4 text-base md:text-lg text-[#B3B9C4]">
-                A few builds I&apos;m proud of — short notes, real screenshots, and
-                links to code.
+              <p className="text-lg md:text-xl text-[#B3B9C4] leading-relaxed mb-8">
+                A collection of projects that showcase different technologies and approaches. Each includes technical details, challenges faced, and lessons learned.
               </p>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-12 text-center">
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-2 text-[#4F8FF7] hover:text-[#77A7F8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14] rounded-md px-1"
-                aria-label="View selected projects"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#4F8FF7] text-[#0B0F14] font-medium rounded-md hover:bg-[#387EF6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14] transition-colors"
+                aria-label="View all projects"
               >
-                View projects
-                <span
-                  aria-hidden="true"
-                  className="inline-block translate-x-0 transition-transform group-hover:translate-x-0.5"
-                >
-                  →
-                </span>
+                View All Projects
               </Link>
             </div>
           </div>
