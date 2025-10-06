@@ -88,7 +88,7 @@ export default function NavBar() {
       name: "LinkedIn",
       path: process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://www.linkedin.com/",
       icon: (
-        <div className="flex items-center justify-center bg-white rounded-md">
+        <div className="flex items-center justify-center rounded-md">
           <Image
             src="/LinkedIn-Icon.svg"
             alt="LinkedIn"
@@ -103,11 +103,11 @@ export default function NavBar() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-gray-900/80 backdrop-blur-md shadow-lg h-16" : "bg-transparent h-20"}`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-[#0B0F14]/80 backdrop-blur-md shadow-lg h-16" : "bg-transparent h-20"}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         <Link href="/" className="text-xl font-bold tracking-tight">
-          <span className="bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent">
+          <span className="text-[#4F8FF7]">
             Daniel Green
           </span>
         </Link>
@@ -118,10 +118,10 @@ export default function NavBar() {
             <Link
               key={link.name}
               href={link.path}
-              className="text-gray-300 hover:text-white transition-colors relative group py-2"
+              className="text-gray-300 hover:text-white transition-colors relative group py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14] rounded"
             >
               {link.name}
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#4F8FF7] opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
             </Link>
           ))}
         </nav>
@@ -134,7 +134,7 @@ export default function NavBar() {
               href={link.path}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
+              className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-[#1A2331]/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14]"
               aria-label={link.name}
             >
               {link.icon}
@@ -144,7 +144,7 @@ export default function NavBar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-300 focus:outline-none"
+          className="md:hidden text-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14] rounded"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -158,14 +158,14 @@ export default function NavBar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-md shadow-lg">
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#0B0F14]/95 backdrop-blur-md shadow-lg">
           <div className="px-4 py-6 space-y-4">
             <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.path}
-                  className="text-gray-300 hover:text-white text-lg font-medium"
+                  className="text-gray-300 hover:text-white text-lg font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14] rounded"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
