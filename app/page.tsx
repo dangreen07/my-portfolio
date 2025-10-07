@@ -36,10 +36,10 @@ export default function Home() {
                 Daniel Green
               </h1>
               <p className="text-xl md:text-2xl leading-relaxed text-[#B3B9C4] mb-8 font-medium">
-                Software engineer and Physics BSc student
+                Full stack developer and Physics BSc student
               </p>
               <p className="text-lg md:text-xl text-[#94A3B8] leading-relaxed max-w-2xl mx-auto">
-                I build web applications with Next.js, TypeScript, and React. Currently learning Rust and exploring quantitative analysis.
+                I build web applications with Next.js, Typescript and backend API&apos;s with Rust.
               </p>
             </div>
 
