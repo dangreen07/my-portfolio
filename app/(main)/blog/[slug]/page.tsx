@@ -7,6 +7,7 @@ import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import { FaCalendarAlt, FaArrowLeft } from "react-icons/fa";
 import CodeBlock from "./CodeBlock";
+import LatexBlock from "./LatexBlock";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
 
@@ -34,6 +35,11 @@ type SanityCode = {
   code: string,
   language: string,
   _key: string
+}
+
+type SanityLatex = {
+  _type: 'latex';
+  body: string
 }
 
 const myPortableTextComponents = {
@@ -70,6 +76,15 @@ const myPortableTextComponents = {
       return (
         <div className="my-6 overflow-hidden">
           <CodeBlock code={value.code} language={value.language} />
+        </div>
+      )
+    },
+    latex: ({ value }: { value: SanityLatex }) => {
+      return (
+        <div className="text-gray-300 flex justify-center">
+          <div className="">
+            <LatexBlock body={value.body} />
+          </div>
         </div>
       )
     }
