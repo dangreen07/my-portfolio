@@ -30,13 +30,6 @@ export const postType = defineType({
         { type: 'image' },
         { type: 'code' },
         { type: 'latex' },
-        {
-          type: 'block',
-          title: 'Block',
-          of: [
-            { type: 'latex', title: 'Inline math' },
-          ],
-        },
       ],
     })
   ],
