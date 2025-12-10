@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const postType = defineType({
   name: 'post',
@@ -17,15 +17,15 @@ export const postType = defineType({
       },
     }),
     defineField({
-        name: 'publishedAt',
-        type: 'datetime',
-        title: 'Published at',
+      name: 'publishedAt',
+      type: 'datetime',
+      title: 'Published at',
     }),
     defineField({
-        name: 'body',
-        type: 'array',
-        title: 'Content',
-        of: [{type: 'block'}, {type: 'image'}, {type: 'code'}],
+      name: 'body',
+      type: 'array',
+      title: 'Content',
+      of: [{ type: 'block' }, { type: 'image' }, { type: 'code' }, { type: 'latex' }],
     })
   ],
 })
