@@ -1,160 +1,64 @@
-import Link from "next/link";
-import NavBar from "@/components/NavBar";
+import Image from "next/image";
 
 export default function Home() {
-  // Public env vars for external links (rendered server-side, safe for client)
-  const LINKEDIN_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL || "#";
-  const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL || "#";
-
-  const btnBase =
-    "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14] transition-colors";
-  const btnPrimary =
-    "bg-[#4F8FF7] text-[#0B0F14] hover:bg-[#387EF6] " + btnBase;
-  const btnSecondary =
-    "text-[#4F8FF7] border border-[#4F8FF7] hover:bg-[#1A2331]/50 " + btnBase;
-
   return (
-    <div className="min-h-screen">
-      {/* Site header */}
-      <header aria-label="Site header" className="pt-2">
-        <NavBar />
-      </header>
-
-      {/* Main content */}
-      <main id="main" role="main" className="flex flex-col">
-        {/* Hero */}
-        <section
-          aria-labelledby="hero-title"
-          className="px-6 pt-20 md:pt-28 pb-16 md:pb-20"
-        >
-          <div className="mx-auto max-w-4xl">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1
-                id="hero-title"
-                className="text-5xl md:text-6xl font-bold tracking-tight text-[#E6E6E6] mb-6"
-              >
-                Daniel Green
-              </h1>
-              <p className="text-xl md:text-2xl leading-relaxed text-[#B3B9C4] mb-8 font-medium">
-                Full stack developer and Physics BSc student
-              </p>
-              <p className="text-lg md:text-xl text-[#94A3B8] leading-relaxed max-w-2xl mx-auto">
-                I build web applications with Next.js, Typescript and backend API&apos;s with Rust.
-              </p>
-            </div>
-
-            <div className="mt-12 md:mt-16 flex flex-wrap justify-center gap-4 md:gap-6">
-              <a
-                href="/projects"
-                className={btnPrimary}
-                aria-label="View my projects"
-              >
-                View Projects
-              </a>
-              <a
-                href={GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={btnSecondary}
-                aria-label="Open GitHub profile in a new tab"
-              >
-                GitHub
-              </a>
-              <a
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={btnSecondary}
-                aria-label="Open LinkedIn profile in a new tab"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* About */}
-        <section
-          aria-labelledby="about-title"
-          className="px-6 py-16 md:py-20 border-t border-white/10"
-        >
-          <div className="mx-auto max-w-4xl">
-            <h2
-              id="about-title"
-              className="text-2xl md:text-3xl font-bold text-[#E6E6E6] mb-6"
+    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+        <Image
+          className="dark:invert"
+          src="/next.svg"
+          alt="Next.js logo"
+          width={100}
+          height={20}
+          priority
+        />
+        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+            To get started, edit the page.tsx file.
+          </h1>
+          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+            Looking for a starting point or more instructions? Head over to{" "}
+            <a
+              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+              className="font-medium text-zinc-950 dark:text-zinc-50"
             >
-              About
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-              <div>
-                <p className="text-lg md:text-xl text-[#B3B9C4] leading-relaxed mb-6">
-                  I&apos;m a software engineer and Physics BSc student with a passion for building reliable web applications. My work focuses on creating clean, maintainable code that solves real problems.
-                </p>
-                <p className="text-base md:text-lg text-[#94A3B8] leading-relaxed">
-                  I enjoy exploring the intersection of quantitative analysis and software engineering, using data-driven approaches to build better applications.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg md:text-xl font-semibold text-[#E6E6E6] mb-4">
-                  Technologies I work with
-                </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    "Next.js",
-                    "React",
-                    "TypeScript",
-                    "Python",
-                    "Rust",
-                    "SQL",
-                    "Postgres",
-                    "Docker",
-                    "AWS",
-                    "Tailwind CSS",
-                    "Node.js",
-                    "Git"
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="text-sm text-[#C7CCD6] py-2 px-3 rounded-md bg-white/5 border border-white/10"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Projects */}
-        <section
-          aria-labelledby="projects-title"
-          className="px-6 py-16 md:py-20 border-t border-white/10"
-        >
-          <div className="mx-auto max-w-4xl">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2
-                id="projects-title"
-                className="text-2xl md:text-3xl font-bold text-[#E6E6E6] mb-6"
-              >
-                Selected Projects
-              </h2>
-              <p className="text-lg md:text-xl text-[#B3B9C4] leading-relaxed mb-8">
-                A collection of projects that showcase different technologies and approaches. Each includes technical details, challenges faced, and lessons learned.
-              </p>
-            </div>
-
-            <div className="mt-12 text-center">
-              <Link
-                href="/projects"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#4F8FF7] text-[#0B0F14] font-medium rounded-md hover:bg-[#387EF6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8FF7] focus-visible:ring-offset-2 ring-offset-[#0B0F14] transition-colors"
-                aria-label="View all projects"
-              >
-                View All Projects
-              </Link>
-            </div>
-          </div>
-        </section>
+              Templates
+            </a>{" "}
+            or the{" "}
+            <a
+              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+              className="font-medium text-zinc-950 dark:text-zinc-50"
+            >
+              Learning
+            </a>{" "}
+            center.
+          </p>
+        </div>
+        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+          <a
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              className="dark:invert"
+              src="/vercel.svg"
+              alt="Vercel logomark"
+              width={16}
+              height={16}
+            />
+            Deploy Now
+          </a>
+          <a
+            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
+            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Documentation
+          </a>
+        </div>
       </main>
     </div>
   );
