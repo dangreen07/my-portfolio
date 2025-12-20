@@ -1,7 +1,7 @@
 import config from '@/payload.config';
 import { getPayload } from 'payload';
-import Post from './post';
 import { redirect } from 'next/navigation';
+import Project from './project';
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
     const payloadConfig = await config
@@ -9,8 +9,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
     const slug = (await params).slug;
 
-    const post = await payload.find({
-        collection: 'blog-posts',       // change to your collection slug (e.g., 'blogs')
+    const project = await payload.find({
+        collection: 'projects',       // change to your collection slug (e.g., 'blogs')
         where: {
             slug: { equals: slug }
         },
@@ -18,9 +18,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         depth: 1,
     }).then((value) => value.docs.at(0) ?? null);
 
-    if (!post) {
-        return redirect("/blog");
+    if (!project) {
+        return redirect("/projects");
     }
 
-    return <Post post={post} />
+    return <Project project={project} />
 }

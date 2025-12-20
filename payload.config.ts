@@ -5,6 +5,7 @@ import { buildConfig } from 'payload'
 import { BlogPosts } from './app/collections/blog-posts';
 import { Media } from './app/collections/media';
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
+import { Projects } from './app/collections/projects';
 
 export default buildConfig({
     // If you'd like to use Rich Text, pass your editor here
@@ -13,7 +14,8 @@ export default buildConfig({
     // Define and configure your collections in this array
     collections: [
         BlogPosts,
-        Media
+        Media,
+        Projects
     ],
 
     // Your Payload secret - should be a complex and secure string, unguessable

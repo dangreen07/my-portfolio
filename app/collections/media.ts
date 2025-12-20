@@ -37,4 +37,7 @@ export const Media: CollectionConfig = {
             type: 'text',
         },
     ],
+    access: {
+        read: () => true
+    }
 }

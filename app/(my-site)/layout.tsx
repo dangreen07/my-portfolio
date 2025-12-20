@@ -24,24 +24,24 @@ export default function RootLayout({
             </Link>
 
             <nav aria-label="Primary" className="flex items-center gap-4 text-sm">
-              <a href="/projects" className="hover:underline">
+              <Link href="/projects" className="hover:underline">
                 Projects
-              </a>
-              <a href="/blog" className="hover:underline">
+              </Link>
+              <Link href="/blog" className="hover:underline">
                 Blog
-              </a>
+              </Link>
               <Link href="/about" className="hover:underline">
                 About
               </Link>
 
-              <a
+              <Link
                 href="https://github.com/dangreen07"
                 target="_blank"
                 rel="noreferrer"
                 className="ml-3 px-3 py-1 rounded-md bg-slate-900 text-white text-sm"
               >
                 GitHub
-              </a>
+              </Link>
             </nav>
           </div>
         </header>
@@ -52,9 +52,6 @@ export default function RootLayout({
           <div className="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
             <div>© {new Date().getFullYear()} Daniel Green</div>
             <div className="flex gap-4">
-              <a href="/privacy" className="hover:underline">
-                Privacy
-              </a>
             </div>
           </div>
         </footer>

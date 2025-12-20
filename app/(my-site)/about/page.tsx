@@ -30,7 +30,7 @@ export default function About() {
 
                 <div className="prose max-w-none text-slate-700">
                     <p>
-                        I'm Daniel Green — a full‑stack developer and Physics BSc student.
+                        I&apos;m Daniel Green - a full-stack developer and Physics BSc student.
                         I build web applications with Next.js and TypeScript, write backend
                         services in Rust, and enjoy shipping clean, maintainable software.
                     </p>
