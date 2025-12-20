@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export const metadata = {
     title: "About — Daniel Green",
@@ -43,50 +42,50 @@ export default function About() {
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-2">
-                        <a
+                        <Link
                             href={GITHUB}
                             target="_blank"
                             rel="noreferrer"
                             className="inline-block text-sm px-3 py-1 border rounded-md"
                         >
                             GitHub
-                        </a>
+                        </Link>
 
-                        <a
+                        <Link
                             href={LINKEDIN}
                             target="_blank"
                             rel="noreferrer"
                             className="inline-block text-sm px-3 py-1 border rounded-md"
                         >
                             LinkedIn
-                        </a>
+                        </Link>
 
-                        <a
+                        <Link
                             href={TWITTER}
                             target="_blank"
                             rel="noreferrer"
                             className="inline-block text-sm px-3 py-1 border rounded-md"
                         >
                             X / Twitter
-                        </a>
+                        </Link>
 
-                        <a
+                        <Link
                             href={MEDIUM}
                             target="_blank"
                             rel="noreferrer"
                             className="inline-block text-sm px-3 py-1 border rounded-md"
                         >
                             Medium
-                        </a>
+                        </Link>
 
-                        <a
+                        <Link
                             href={UPWORK}
                             target="_blank"
                             rel="noreferrer"
                             className="inline-block text-sm px-3 py-1 border rounded-md"
                         >
                             Upwork
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
