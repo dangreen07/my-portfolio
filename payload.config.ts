@@ -1,9 +1,10 @@
 import sharp from 'sharp'
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { buildConfig } from 'payload'
-import { CodeBlock } from '@/app/blocks/CodeBlock';
-import { MathBlock } from '@/app/blocks/MathBlock'
+import { BlogPosts } from './app/collections/blog-posts';
+import { Media } from './app/collections/media';
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 
 export default buildConfig({
     // If you'd like to use Rich Text, pass your editor here
@@ -11,39 +12,8 @@ export default buildConfig({
 
     // Define and configure your collections in this array
     collections: [
-        {
-            slug: "blog-posts",
-            fields: [
-                {
-                    name: 'title',
-                    type: "text"
-                },
-                {
-                    name: "slug",
-                    type: "text"
-                },
-                {
-                    name: "publishedAt",
-                    type: "date"
-                },
-                {
-                    name: "updatedAt",
-                    type: "date"
-                },
-                {
-                    name: 'content',
-                    type: "richText",
-                    editor: lexicalEditor({
-                        features: ({ defaultFeatures }) => [
-                            ...defaultFeatures,
-                            BlocksFeature({
-                                blocks: [CodeBlock, MathBlock],
-                            }),
-                        ],
-                    }),
-                }
-            ]
-        }
+        BlogPosts,
+        Media
     ],
 
     // Your Payload secret - should be a complex and secure string, unguessable
@@ -55,6 +25,17 @@ export default buildConfig({
             connectionString: process.env.DATABASE_URL || '',
         }
     }),
+    plugins: [
+        vercelBlobStorage({
+            enabled: true, // Optional, defaults to true
+            // Specify which collections should use Vercel Blob
+            collections: {
+                media: true,
+            },
+            // Token provided by Vercel once Blob storage is added to your Vercel project
+            token: process.env.BLOB_READ_WRITE_TOKEN,
+        }),
+    ],
     // If you want to resize images, crop, set focal point, etc.
     // make sure to install it and pass it to the config.
     // This is optional - if you don't need to do these things,

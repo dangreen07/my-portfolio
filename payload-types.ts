@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     'blog-posts': BlogPost;
+    media: Media;
     'payload-kv': PayloadKv;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
@@ -77,6 +78,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -122,11 +124,11 @@ export interface UserAuthOperations {
  */
 export interface BlogPost {
   id: number;
-  title?: string | null;
-  slug?: string | null;
-  publishedAt?: string | null;
+  title: string;
+  slug: string;
+  publishedAt: string;
   updatedAt: string;
-  content?: {
+  content: {
     root: {
       type: string;
       children: {
@@ -140,8 +142,53 @@ export interface BlogPost {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -194,6 +241,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blog-posts';
         value: number | BlogPost;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
       } | null)
     | ({
         relationTo: 'users';
@@ -252,6 +303,58 @@ export interface BlogPostsSelect<T extends boolean = true> {
   updatedAt?: T;
   content?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -320,8 +423,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "CodeBlock".
  */
 export interface CodeBlock {
-  filename?: string | null;
-  language?: ('javascript' | 'typescript' | 'html' | 'css' | 'python') | null;
+  language?: ('javascript' | 'typescript' | 'html' | 'css' | 'powershell' | 'json' | 'python') | null;
   code: string;
   id?: string | null;
   blockName?: string | null;
@@ -340,19 +442,6 @@ export interface MathBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'math';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "InlineMathBlock".
- */
-export interface InlineMathBlock {
-  /**
-   * LaTeX expression (no $ delimiters)
-   */
-  latex: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'inlineMath';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -4,7 +4,6 @@ export const CodeBlock: Block = {
     slug: 'code',
     interfaceName: 'CodeBlock',
     fields: [
-        { name: 'filename', type: 'text' },
         {
             name: 'language',
             type: 'select',
@@ -13,6 +12,8 @@ export const CodeBlock: Block = {
                 { label: 'TypeScript', value: 'typescript' },
                 { label: 'HTML', value: 'html' },
                 { label: 'CSS', value: 'css' },
+                { label: 'PowerShell', value: 'powershell' },
+                { label: "JSON", value: "json" },
                 { label: 'Python', value: 'python' },
                 // add others you want
             ],
