@@ -1,20 +1,15 @@
-import Projects from "./projects";
+"use server";
+
 import { getPayload } from "payload";
 import config from '@/payload.config';
 
-async function getProjects() {
+export async function getPosts() {
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig });
 
     const all = await payload.find({
-        collection: 'projects',
+        collection: 'blog-posts',
         pagination: false, // returns all docs
     }).then((value) => value.docs);
     return all;
-}
-
-export default async function ProjectsPage() {
-    const projects = await getProjects();
-
-    return <Projects projects={projects} />
 }
