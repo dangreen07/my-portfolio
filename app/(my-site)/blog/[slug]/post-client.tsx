@@ -5,11 +5,12 @@ import { BlogPost } from "@/payload-types";
 import { DefaultNodeTypes, SerializedBlockNode } from "@payloadcms/richtext-lexical";
 import type { CodeBlock as CodeBlockProps, MathBlock as MathBlockProps } from "@/payload-types";
 import { JSXConvertersFunction, RichText as RichTextConverter } from '@payloadcms/richtext-lexical/react';
-import type { SerializedUploadNode, SerializedLinkNode, SerializedParagraphNode } from '@payloadcms/richtext-lexical'
+import type { SerializedLinkNode, SerializedUploadNode, SerializedParagraphNode } from '@payloadcms/richtext-lexical'
 import Image from "next/image";
 import MathBlock from "../../components/math-block";
 import CodeBlock from "../../components/code-block";
 import Latex from "react-latex-next";
+import type { ReactNode } from "react";
 
 export default function PostClient({ post }: { post: BlogPost }) {
     const router = useRouter();
@@ -47,7 +48,7 @@ export default function PostClient({ post }: { post: BlogPost }) {
 
             <h1 className="text-5xl font-bold">{post.title}</h1>
             <p>Published at: {new Date(Date.parse(post.publishedAt)).toDateString()}</p>
-            <article className="prose prose-headings:font-medium w-full max-w-full mt-5 text-wrap">
+            <article className="prose prose-headings:font-medium w-full max-w-full mt-5">
                 <RichTextConverter data={post.content} converters={jsxConverter} />
             </article>
         </div>
@@ -56,13 +57,74 @@ export default function PostClient({ post }: { post: BlogPost }) {
 
 type NodeTypes = DefaultNodeTypes | SerializedBlockNode<CodeBlockProps | MathBlockProps>;
 
+type ParagraphChildNode = SerializedParagraphNode['children'][number] & {
+    type?: string;
+    fields?: Record<string, unknown>;
+    text?: string;
+    children?: ParagraphChildNode[];
+};
+
+const isLinkNode = (node: ParagraphChildNode): node is SerializedLinkNode => node?.type === "link";
+
+const renderParagraphChild = (node: ParagraphChildNode, key: string): ReactNode => {
+    if (!node) return null;
+
+    if (isLinkNode(node)) {
+        return renderLinkNode(node, key);
+    }
+
+    const text = typeof node.text === "string" ? node.text : "";
+    if (text) {
+        return (
+            <Latex key={key}>
+                {text}
+            </Latex>
+        );
+    }
+
+    if (Array.isArray(node.children)) {
+        return node.children.map((child, index) => renderParagraphChild(child, `${key}-${index}`));
+    }
+
+    return null;
+};
+
+const renderLinkNode = (node: SerializedLinkNode, key: string): ReactNode => {
+    const urlField = node.fields?.url;
+    const url = typeof urlField === "string" ? urlField : urlField ? String(urlField) : "#";
+    const isHttp = typeof url === "string" && /^(https?:)?\/\//i.test(url);
+    const isMailOrTel = typeof url === "string" && /^(mailto:|tel:)/i.test(url);
+    const isExternal = isHttp && !isMailOrTel;
+
+    return (
+        <a
+            key={key}
+            href={url}
+            className="text-indigo-600 hover:underline"
+            {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+            {node.children?.map((child, index) => renderParagraphChild(child, `${key}-${index}`))}
+        </a>
+    );
+};
+
 const jsxConverter: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
     ...defaultConverters,
     paragraph: ({ node }: { node: SerializedParagraphNode }) => {
-        return <Latex>{node.children.map((value) => {
-            const text = (value as unknown as { 'text': string })['text'];
-            return text;
-        })}</Latex>
+        if (process.env.NODE_ENV !== "production") {
+            const childTypes = node.children.map((child) => (child as { type?: string }).type);
+            const hasLinkChild = childTypes.includes("link");
+            console.debug("[PostClient] paragraph node", {
+                childTypes,
+                hasLinkChild,
+            });
+        }
+
+        return (
+            <p className="m-0">
+                {node.children.map((child, index) => renderParagraphChild(child as ParagraphChildNode, `${index}`))}
+            </p>
+        );
     },
     upload: ({ node }: { node: SerializedUploadNode }) => {
         const upload = node.value;

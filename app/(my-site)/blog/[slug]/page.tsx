@@ -1,9 +1,14 @@
-
-import { Suspense } from 'react';
-import Post from './post';
+import { getPost } from './data';
+import { redirect } from 'next/navigation';
+import PostClient from './post-client';
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    return <Suspense>
-        <Post params={params} />
-    </Suspense>
+    const slug = (await params).slug;
+    const post = await getPost(slug);
+
+    if (!post) {
+        return redirect("/blog");
+    }
+
+    return <PostClient post={post} />
 }
