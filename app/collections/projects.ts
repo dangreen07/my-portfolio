@@ -2,11 +2,20 @@ import { BlocksFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import { CollectionConfig } from "payload";
 import { CodeBlock } from "../blocks/CodeBlock";
 import { MathBlock } from "../blocks/MathBlock";
+import { revalidatePath } from "next/cache";
 
 export const Projects: CollectionConfig = {
     slug: "projects",
     admin: {
         useAsTitle: 'title'
+    },
+    hooks: {
+        afterChange: [
+            async ({ req }) => {
+                revalidatePath("/projects");
+                return req;
+            }
+        ]
     },
     fields: [
         {
