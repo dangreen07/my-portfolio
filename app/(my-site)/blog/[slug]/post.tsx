@@ -5,10 +5,11 @@ import { BlogPost } from "@/payload-types";
 import { DefaultNodeTypes, SerializedBlockNode } from "@payloadcms/richtext-lexical";
 import type { CodeBlock as CodeBlockProps, MathBlock as MathBlockProps } from "@/payload-types";
 import { JSXConvertersFunction, RichText as RichTextConverter } from '@payloadcms/richtext-lexical/react';
-import type { SerializedUploadNode, SerializedLinkNode } from '@payloadcms/richtext-lexical'
+import type { SerializedUploadNode, SerializedLinkNode, SerializedParagraphNode } from '@payloadcms/richtext-lexical'
 import Image from "next/image";
 import MathBlock from "../../components/math-block";
 import CodeBlock from "../../components/code-block";
+import Latex from "react-latex-next";
 
 export default function Post({ post }: { post: BlogPost }) {
     const router = useRouter();
@@ -57,6 +58,12 @@ type NodeTypes = DefaultNodeTypes | SerializedBlockNode<CodeBlockProps | MathBlo
 
 const jsxConverter: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
     ...defaultConverters,
+    paragraph: ({ node }: { node: SerializedParagraphNode }) => {
+        return <Latex>{node.children.map((value) => {
+            const text = (value as unknown as { 'text': string })['text'];
+            return text;
+        })}</Latex>
+    },
     upload: ({ node }: { node: SerializedUploadNode }) => {
         const upload = node.value;
         if (!upload || typeof upload !== "object") return null;
@@ -99,7 +106,10 @@ const jsxConverter: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) =
                 className="text-indigo-600 hover:underline"
                 {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
-                {node.fields.url}
+                {node.children.map((value) => {
+                    const text = (value as unknown as { 'text': string })['text'];
+                    return text;
+                })}
                 {isExternal ? <span className="sr-only"> (opens in a new tab)</span> : null}
             </a>
         );
