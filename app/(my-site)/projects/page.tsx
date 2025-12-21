@@ -1,8 +1,12 @@
 import Projects from "./projects";
 import { getPayload } from "payload";
 import config from '@/payload.config';
+import { cacheLife } from "next/cache";
 
-export default async function ProjectsPage() {
+async function getProjects() {
+    "use cache";
+    cacheLife('minutes');
+
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig });
 
@@ -10,6 +14,11 @@ export default async function ProjectsPage() {
         collection: 'projects',
         pagination: false, // returns all docs
     }).then((value) => value.docs);
+    return all;
+}
 
-    return <Projects projects={all} />
+export default async function ProjectsPage() {
+    const projects = await getProjects();
+
+    return <Projects projects={projects} />
 }

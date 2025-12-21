@@ -1,8 +1,12 @@
 import { getPayload } from "payload";
 import Blog from "./blog";
 import config from '@/payload.config';
+import { cacheLife } from "next/cache";
 
-export default async function BlogPage() {
+async function getPosts() {
+    "use cache";
+    cacheLife('minutes');
+
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig });
 
@@ -10,6 +14,11 @@ export default async function BlogPage() {
         collection: 'blog-posts',
         pagination: false, // returns all docs
     }).then((value) => value.docs);
+    return all;
+}
 
-    return <Blog posts={all} />
+export default async function BlogPage() {
+    const posts = await getPosts();
+
+    return <Blog posts={posts} />
 }
