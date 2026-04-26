@@ -14,9 +14,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create transporter
+    // Create transporter for Spacemail
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: process.env.SMTP_HOST || "mail.spacemail.app",
+      port: parseInt(process.env.SMTP_PORT || "587"),
+      secure: process.env.SMTP_SECURE === "true", // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
