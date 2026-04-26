@@ -18,7 +18,8 @@
       "Bash(pkill -f \"next dev\")",
       "Bash(killall node *)",
       "Bash(git commit -m 'Fix build errors by removing database schema mismatches *)",
-      "Bash(git commit -m 'Configure email to use Spacemail with daniel@mrgreeny.dev *)"
+      "Bash(git commit -m 'Configure email to use Spacemail with daniel@mrgreeny.dev *)",
+      "Bash(git commit -m 'Fix Spacemail SMTP configuration *)"
     ]
   }
 }
