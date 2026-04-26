@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-    title: "About — Daniel Green",
-    description: "About Daniel Green — developer, maker, and Physics student.",
+    title: "About — Daniel Green | Freelance Webapp Developer",
+    description: "Learn about Daniel Green's freelance webapp development services for SMBs. Full-stack expertise, proven track record, and fast turnaround.",
 };
 
 const GITHUB = process.env.NEXT_PUBLIC_GITHUB_URL ?? "#";
@@ -29,16 +29,28 @@ export default function About() {
 
                 <div className="prose max-w-none text-slate-700">
                     <p>
-                        I&apos;m Daniel Green - a full-stack developer and Physics BSc student.
-                        I build web applications with Next.js and TypeScript, write backend
-                        services in Rust, and enjoy shipping clean, maintainable software.
+                        I&apos;m Daniel Green - a full-stack developer specializing in custom web applications for small businesses and startups. I work with Next.js and TypeScript on the frontend, build backend services in Rust or Node.js, and am committed to shipping clean, maintainable software that scales.
+                    </p>
+
+                    <h3>What I can help with</h3>
+                    <p>
+                        I take on all types of web application projects: MVPs, feature development on existing apps, performance optimization, and full rewrites. Whether you need a proof-of-concept to validate an idea or a production-ready platform, I can help.
+                    </p>
+
+                    <h3>How I work</h3>
+                    <p>
+                        I start with a discovery call to understand your goals, constraints, and timeline. I communicate regularly throughout the project, provide transparent timelines, and prioritize shipping working software fast. Most projects go from kickoff to MVP in 2-8 weeks.
+                    </p>
+
+                    <h3>Tech expertise</h3>
+                    <p>
+                        <strong>Frontend:</strong> Next.js, React, TypeScript, Tailwind CSS<br/>
+                        <strong>Backend:</strong> Node.js, Rust, PostgreSQL, REST APIs, GraphQL<br/>
+                        <strong>Infrastructure:</strong> Vercel, AWS, Docker, databases
                     </p>
 
                     <p>
-                        My work sits at the intersection of practical engineering and
-                        curiosity: small products, experiments, and notes from the
-                        process. I like quantifying tradeoffs and automating repetitive
-                        tasks so I can focus on interesting problems.
+                        Interested in working together? <Link href="/contact" className="text-slate-900 underline font-semibold">Get in touch</Link> to discuss your project.
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-2">

@@ -4,9 +4,9 @@ import React from "react";
 import Footer from "./components/footer";
 
 export const metadata = {
-  title: "Daniel Green's Portfolio",
+  title: "Daniel Green — Freelance Webapp Development",
   description:
-    "A personal collection of projects and short writing by Daniel Green.",
+    "Custom web application development for small businesses and startups. Full-stack expertise in Next.js, TypeScript, and modern web technologies.",
 };
 
 export default function RootLayout({
@@ -25,6 +25,9 @@ export default function RootLayout({
             </Link>
 
             <nav aria-label="Primary" className="flex items-center gap-4 text-sm">
+              <Link href="/services" className="hover:underline">
+                Services
+              </Link>
               <Link href="/projects" className="hover:underline">
                 Projects
               </Link>
@@ -36,12 +39,10 @@ export default function RootLayout({
               </Link>
 
               <Link
-                href="https://github.com/dangreen07"
-                target="_blank"
-                rel="noreferrer"
+                href="/contact"
                 className="ml-3 px-3 py-1 rounded-md bg-slate-900 text-white text-sm"
               >
-                GitHub
+                Contact
               </Link>
             </nav>
           </div>

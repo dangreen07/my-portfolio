@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm cache *)",
+      "Bash(npm --version)",
+      "Read(//mnt/c/Users/dangr/Documents/Programming/**)",
+      "Bash(rm -rf node_modules package-lock.json)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"pnpm dev\")",
+      "Bash(pnpm dev *)",
+      "Bash(pkill -9 node)",
+      "Bash(curl -s http://localhost:3003)",
+      "Bash(curl -s http://localhost:3003/services)",
+      "Bash(curl -s http://localhost:3003/contact)",
+      "Bash(git add *)"
+    ]
+  }
+}

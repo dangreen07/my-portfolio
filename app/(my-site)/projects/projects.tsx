@@ -61,8 +61,17 @@ export default function Projects({ projects }: {
                                 href={"/projects/" + p.slug}
                                 className="block p-4 rounded-lg border border-slate-200 hover:shadow-md transition"
                             >
-                                <h3 className="font-medium text-slate-900">{p.title}</h3>
-                                <p className="mt-2 text-sm text-slate-500">{new Date(Date.parse(p["start-date"])).toDateString()}</p>
+                                <div className="flex items-start justify-between gap-2">
+                                    <div className="flex-1 min-w-0">
+                                        <h3 className="font-medium text-slate-900">{p.title}</h3>
+                                        <p className="mt-1 text-xs text-slate-500">{new Date(Date.parse(p["start-date"])).toDateString()}</p>
+                                        {p["project-type"] && (
+                                            <p className="mt-2 inline-block text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">
+                                                {String(p["project-type"]).replace(/([A-Z])/g, ' $1').trim()}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
                             </Link>
                         ))}
                     </div>
