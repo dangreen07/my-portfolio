@@ -91,66 +91,6 @@ export const Projects: CollectionConfig = {
                     }),
                 ],
             }),
-        },
-        {
-            name: 'problem-solved',
-            type: "richText",
-            label: "Problem Solved",
-            editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [
-                    ...defaultFeatures,
-                    BlocksFeature({
-                        blocks: [CodeBlock, MathBlock],
-                    }),
-                ],
-            }),
-        },
-        {
-            name: 'results-metrics',
-            type: "richText",
-            label: "Results & Metrics",
-            editor: lexicalEditor({
-                features: ({ defaultFeatures }) => [
-                    ...defaultFeatures,
-                    BlocksFeature({
-                        blocks: [CodeBlock, MathBlock],
-                    }),
-                ],
-            }),
-        },
-        {
-            name: 'project-type',
-            type: "select",
-            label: "Project Type",
-            options: [
-                { label: "E-commerce Platform", value: "ecommerce" },
-                { label: "SaaS Product", value: "saas" },
-                { label: "Analytics Dashboard", value: "analytics" },
-                { label: "Webapp / Tool", value: "webapp" },
-                { label: "API / Backend", value: "backend" },
-                { label: "Mobile App", value: "mobile" },
-                { label: "Other", value: "other" },
-            ]
-        },
-        {
-            name: 'timeline',
-            type: "text",
-            label: "Timeline (e.g., 4 weeks)",
-        },
-        {
-            name: 'industry',
-            type: "select",
-            label: "Industry",
-            options: [
-                { label: "E-commerce", value: "ecommerce" },
-                { label: "SaaS", value: "saas" },
-                { label: "Healthcare", value: "healthcare" },
-                { label: "Finance", value: "finance" },
-                { label: "Education", value: "education" },
-                { label: "Retail", value: "retail" },
-                { label: "Technology", value: "technology" },
-                { label: "Other", value: "other" },
-            ]
         }
     ]
 }

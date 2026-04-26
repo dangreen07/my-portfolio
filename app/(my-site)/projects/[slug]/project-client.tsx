@@ -112,57 +112,9 @@ export default function ProjectClient({ project }: { project: ProjectType }) {
                 ) : null}
             </div>
 
-            {/* Case study metadata */}
-            {(project['timeline'] || project['project-type'] || project['industry']) && (
-                <div className="grid md:grid-cols-3 gap-4 mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                    {project['project-type'] && (
-                        <div>
-                            <p className="text-xs font-semibold text-slate-600 uppercase">Project Type</p>
-                            <p className="text-sm text-slate-900">{String(project['project-type']).replace(/([A-Z])/g, ' $1').trim()}</p>
-                        </div>
-                    )}
-                    {project['timeline'] && (
-                        <div>
-                            <p className="text-xs font-semibold text-slate-600 uppercase">Timeline</p>
-                            <p className="text-sm text-slate-900">{String(project['timeline'])}</p>
-                        </div>
-                    )}
-                    {project['industry'] && (
-                        <div>
-                            <p className="text-xs font-semibold text-slate-600 uppercase">Industry</p>
-                            <p className="text-sm text-slate-900">{String(project['industry']).replace(/([A-Z])/g, ' $1').trim()}</p>
-                        </div>
-                    )}
-                </div>
-            )}
-
-            {/* Problem solved section */}
-            {project['problem-solved'] && (
-                <section className="mb-8">
-                    <h2 className="text-xl font-bold mb-3">Problem Solved</h2>
-                    <article className="prose prose-sm sm:prose lg:prose-lg max-w-none">
-                        <RichTextConverter data={project['problem-solved']} converters={projectJsxConverter} />
-                    </article>
-                </section>
-            )}
-
-            {/* Main content */}
-            <section className="mb-8">
-                <h2 className="text-xl font-bold mb-3">Overview</h2>
-                <article className="prose prose-sm sm:prose lg:prose-lg max-w-none">
-                    <RichTextConverter data={project.content} converters={projectJsxConverter} />
-                </article>
-            </section>
-
-            {/* Results section */}
-            {project['results-metrics'] && (
-                <section>
-                    <h2 className="text-xl font-bold mb-3">Results & Metrics</h2>
-                    <article className="prose prose-sm sm:prose lg:prose-lg max-w-none">
-                        <RichTextConverter data={project['results-metrics']} converters={projectJsxConverter} />
-                    </article>
-                </section>
-            )}
+            <article className="prose prose-sm sm:prose lg:prose-lg max-w-none">
+                <RichTextConverter data={project.content} converters={projectJsxConverter} />
+            </article>
         </div>
     );
 }

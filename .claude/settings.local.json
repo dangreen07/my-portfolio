@@ -13,7 +13,11 @@
       "Bash(curl -s http://localhost:3003)",
       "Bash(curl -s http://localhost:3003/services)",
       "Bash(curl -s http://localhost:3003/contact)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(pnpm build *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(killall node *)",
+      "Bash(git commit -m 'Fix build errors by removing database schema mismatches *)"
     ]
   }
 }
