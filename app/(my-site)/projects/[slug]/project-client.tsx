@@ -16,6 +16,7 @@ import type {
 import { JSXConvertersFunction, RichText as RichTextConverter } from "@payloadcms/richtext-lexical/react";
 import CodeBlock from "../../components/code-block";
 import MathBlock from "../../components/math-block";
+import Link from "next/link";
 
 type NodeTypes = DefaultNodeTypes | SerializedBlockNode<CodeBlockProps | MathBlockProps>;
 
@@ -53,6 +54,10 @@ export default function ProjectClient({ project }: { project: ProjectType }) {
 
     return (
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
+            <Link
+                href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css"
+                rel="stylesheet"
+            />
             <div className="mb-4">
                 <button
                     onClick={handleBack}

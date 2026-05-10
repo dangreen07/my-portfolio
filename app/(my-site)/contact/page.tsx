@@ -1,20 +1,13 @@
 "use client";
 
-import Script from "next/script";
+import { useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useState } from "react";
 
-declare global {
-    interface Window {
-        grecaptcha: {
-            execute: (siteKey: string, options: { action: string }) => Promise<string>;
-        };
-    }
-}
-
 export default function Contact() {
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-    const [recaptchaReady, setRecaptchaReady] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -40,11 +33,10 @@ export default function Contact() {
         setSubmitStatus("idle");
 
         try {
-            if (!recaptchaReady) {
-                throw new Error("reCAPTCHA is not ready yet");
+            const token = recaptchaRef.current?.getValue();
+            if (!token) {
+                throw new Error("reCAPTCHA verification failed");
             }
-
-            const token = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: "submit" });
 
             const response = await fetch("/api/contact", {
                 method: "POST",
@@ -80,10 +72,6 @@ export default function Contact() {
 
     return (
         <div className="py-12">
-            <Script
-                src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-                onLoad={() => setRecaptchaReady(true)}
-            />
             <div className="max-w-2xl">
                 <h1 className="text-4xl font-extrabold mb-4">Get in touch</h1>
                 <p className="text-lg text-slate-700 mb-8">
@@ -207,9 +195,16 @@ export default function Contact() {
                         </div>
                     )}
 
+                    <div className="flex justify-center">
+                        <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                        />
+                    </div>
+
                     <button
                         type="submit"
-                        disabled={isSubmitting || !recaptchaReady}
+                        disabled={isSubmitting}
                         className="w-full bg-slate-900 text-white px-6 py-3 rounded-md font-medium hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isSubmitting ? "Sending..." : "Send inquiry"}

@@ -9,8 +9,9 @@ import type { SerializedLinkNode, SerializedUploadNode, SerializedParagraphNode 
 import Image from "next/image";
 import MathBlock from "../../components/math-block";
 import CodeBlock from "../../components/code-block";
-import Latex from "react-latex-next";
 import type { ReactNode } from "react";
+import Link from "next/link";
+import katex from "katex";
 
 export default function PostClient({ post }: { post: BlogPost }) {
     const router = useRouter();
@@ -36,6 +37,10 @@ export default function PostClient({ post }: { post: BlogPost }) {
 
     return (
         <div className="max-w-3xl mx-auto p-2 sm:p-5">
+            <Link
+                href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css"
+                rel="stylesheet"
+            />
             <div className="mb-4">
                 <button
                     onClick={handleBack}
@@ -76,9 +81,26 @@ const renderParagraphChild = (node: ParagraphChildNode, key: string): ReactNode 
     const text = typeof node.text === "string" ? node.text : "";
     if (text) {
         return (
-            <Latex key={key}>
-                {text}
-            </Latex>
+            <span key={key} dangerouslySetInnerHTML={{ 
+                __html: text.replace(
+                    /(?<!\\)\$(?:\\.|[^\$\\])+\$/g, 
+                    (match) => {
+                    // Your function logic here
+                    // 'match' is the full string like "$z_t$"
+                    const content = match.slice(1, -1); // Remove the $ delimiters
+
+                    const katexIfied = katex.renderToString(content, {
+                        displayMode: false,
+                    })
+                    
+                    // Example: wrap in a span with class
+                    return `<span class="latex-math">${katexIfied}</span>`;
+                    
+                    // Or process the content however you need
+                    // return `<span style="color: blue; font-style: italic;">${match}</span>`;
+                    }
+                )
+            }} />
         );
     }
 
