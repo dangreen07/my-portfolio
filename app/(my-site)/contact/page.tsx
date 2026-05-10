@@ -208,7 +208,7 @@ export default function Contact() {
                     </button>
 
                     <p className="text-sm text-slate-600 text-center">
-                        Or reach out directly: <a href="mailto:daniel@mrgreeny.dev" className="text-slate-900 underline">harmonickarma65@gmail.com</a>
+                        Or reach out directly: <a href={`mailto:${process.env.NEXT_PUBLIC_ADMIN_EMAIL!}`} className="text-slate-900 underline">{process.env.NEXT_PUBLIC_ADMIN_EMAIL!}</a>
                     </p>
                 </form>
             </div>

@@ -3,8 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, company, projectDescription, budget, timeline, recaptchaToken } =
-      await request.json();
+    const {
+      name,
+      email,
+      company,
+      projectDescription,
+      budget,
+      timeline,
+      recaptchaToken,
+    } = await request.json();
 
     // Validate required fields
     if (!name || !email || !projectDescription) {
@@ -22,11 +29,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const recaptchaResponse = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
-    });
+    const recaptchaResponse = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+      },
+    );
 
     const recaptchaData = await recaptchaResponse.json();
 
@@ -68,7 +78,7 @@ Reply directly to: ${email}
     // Send email to admin
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: process.env.ADMIN_EMAIL,
+      to: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
       subject: `New project inquiry from ${name}`,
       text: adminEmailContent,
       replyTo: email,
