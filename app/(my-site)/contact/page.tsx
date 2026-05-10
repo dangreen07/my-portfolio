@@ -1,6 +1,15 @@
 "use client";
 
+import Script from "next/script";
 import { useState } from "react";
+
+declare global {
+    interface Window {
+        grecaptcha: {
+            execute: (siteKey: string, options: { action: string }) => Promise<string>;
+        };
+    }
+}
 
 export default function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,12 +39,14 @@ export default function Contact() {
         setSubmitStatus("idle");
 
         try {
+            const token = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: "submit" });
+
             const response = await fetch("/api/contact", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, recaptchaToken: token }),
             });
 
             if (!response.ok) {
@@ -64,6 +75,7 @@ export default function Contact() {
 
     return (
         <div className="py-12">
+            <Script src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}></Script>
             <div className="max-w-2xl">
                 <h1 className="text-4xl font-extrabold mb-4">Get in touch</h1>
                 <p className="text-lg text-slate-700 mb-8">
@@ -196,7 +208,7 @@ export default function Contact() {
                     </button>
 
                     <p className="text-sm text-slate-600 text-center">
-                        Or reach out directly: <a href="mailto:harmonickarma65@gmail.com" className="text-slate-900 underline">harmonickarma65@gmail.com</a>
+                        Or reach out directly: <a href="mailto:daniel@mrgreeny.dev" className="text-slate-900 underline">harmonickarma65@gmail.com</a>
                     </p>
                 </form>
             </div>
