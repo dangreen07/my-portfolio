@@ -67,6 +67,7 @@ Email: ${email}
 Company: ${company || "Not specified"}
 Budget: ${budget || "Not specified"}
 Timeline: ${timeline || "Not specified"}
+ReCaptcha Data: ${JSON.stringify(recaptchaData)}
 
 Project Description:
 ${projectDescription}
