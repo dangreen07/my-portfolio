@@ -3,25 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const {
-      name,
-      email,
-      company,
-      projectDescription,
-      budget,
-      timeline,
-      recaptchaToken,
-    } = await request.json();
+    const { serviceType, email, recaptchaToken } = await request.json();
 
-    // Validate required fields
-    if (!name || !email || !projectDescription) {
+    if (!serviceType || !email) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 },
       );
     }
 
-    // Verify reCAPTCHA token
     if (!recaptchaToken) {
       return NextResponse.json(
         { error: "reCAPTCHA verification failed" },
@@ -47,69 +37,33 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create transporter for Spacemail
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "mail.spacemail.app",
       port: parseInt(process.env.SMTP_PORT || "587"),
-      secure: process.env.SMTP_SECURE === "true", // true for 465, false for other ports
+      secure: process.env.SMTP_SECURE === "true",
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
       },
     });
 
-    // Email to Daniel
-    const adminEmailContent = `
-New contact form submission:
-
-Name: ${name}
-Email: ${email}
-Company: ${company || "Not specified"}
-Budget: ${budget || "Not specified"}
-Timeline: ${timeline || "Not specified"}
-ReCaptcha Data: ${JSON.stringify(recaptchaData)}
-
-Project Description:
-${projectDescription}
-
----
-Reply directly to: ${email}
-        `;
-
-    // Send email to admin
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
-      subject: `New project inquiry from ${name}`,
-      text: adminEmailContent,
+      subject: `New service inquiry: ${serviceType}`,
+      text: `
+New service inquiry:
+
+Service type: ${serviceType}
+Email: ${email}
+
+Reply to: ${email}
+      `,
       replyTo: email,
     });
 
-    // Send confirmation email to user
-    const userEmailContent = `
-Hi ${name.split(" ")[0]},
-
-Thanks for reaching out! I received your project inquiry and will get back to you within 24 hours.
-
-Here's what you sent:
-Budget: ${budget || "Not specified"}
-Timeline: ${timeline || "Not specified"}
-
-I'll review your project details and send you a response soon.
-
-Best regards,
-Daniel Green
-        `;
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: email,
-      subject: "Project inquiry received — Daniel Green",
-      text: userEmailContent,
-    });
-
     return NextResponse.json(
-      { message: "Form submitted successfully" },
+      { message: "Inquiry sent successfully" },
       { status: 200 },
     );
   } catch (error) {

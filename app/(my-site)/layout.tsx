@@ -4,9 +4,9 @@ import React from "react";
 import Footer from "./components/footer";
 
 export const metadata = {
-  title: "Daniel Green — Freelance Webapp Development",
+  title: "Daniel Green — AI Solutions for Business",
   description:
-    "Custom web application development for small businesses and startups. Full-stack expertise in Next.js, TypeScript, and modern web technologies.",
+    "I build custom AI assistants and automations that save time, improve response times, and reduce manual work for businesses.",
 };
 
 export default function RootLayout({
@@ -25,9 +25,7 @@ export default function RootLayout({
             </Link>
 
             <nav aria-label="Primary" className="flex items-center gap-4 text-sm">
-              <Link href="/services" className="hover:underline">
-                Services
-              </Link>
+
               <Link href="/projects" className="hover:underline">
                 Projects
               </Link>
@@ -48,7 +46,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main className="max-w-4xl mx-auto px-6 min-h-screen">{children}</main>
+        <main className="max-w-5xl mx-auto px-6 min-h-screen">{children}</main>
 
         <Footer />
       </body>
