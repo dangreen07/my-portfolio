@@ -35,6 +35,14 @@ export default function RootLayout({
               <Link href="/about" className="hover:underline">
                 About
               </Link>
+              <Link
+                href="https://portal.mrgreeny.dev"
+                className="hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Client Portal
+              </Link>
 
               <Link
                 href="/contact"
