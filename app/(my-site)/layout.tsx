@@ -2,6 +2,7 @@ import "./globals.css";
 import Link from "next/link";
 import React from "react";
 import Footer from "./components/footer";
+import ChatWidget from "./components/chat-widget";
 
 export const metadata = {
   title: "Daniel Green — AI Solutions for Business",
@@ -55,7 +56,10 @@ export default function RootLayout({
         </header>
 
         <main className="max-w-5xl mx-auto px-6 min-h-screen">{children}</main>
-
+        <ChatWidget
+          clientId="71491920-aaf2-4a25-87b7-2c892de20907"
+          apiUrl="https://api.portal.mrgreeny.dev"
+        />
         <Footer />
       </body>
     </html>
