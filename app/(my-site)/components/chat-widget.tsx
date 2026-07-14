@@ -43,7 +43,12 @@ export default function ChatWidget({ clientId, appSlug = "site-assistant", apiUr
 
     const text = input.trim();
     setInput("");
-    setMessages((prev) => [...prev, { id: "temp", role: "user", content: text }]);
+    const streamId = "streaming";
+    setMessages((prev) => [
+      ...prev,
+      { id: "user", role: "user", content: text },
+      { id: streamId, role: "assistant", content: "" },
+    ]);
     setSending(true);
 
     try {
@@ -60,20 +65,57 @@ export default function ChatWidget({ clientId, appSlug = "site-assistant", apiUr
 
       if (!res.ok) throw new Error("Failed to send message");
 
-      const data = await res.json();
-      setConversationId(data.conversationId);
-      localStorage.setItem(CONVERSATION_KEY, data.conversationId);
-      setMessages((prev) => [
-        ...prev.filter((m) => m.id !== "temp"),
-        { id: "temp", role: "user", content: text },
-        { id: data.message.id, role: data.message.role, content: data.message.content },
-      ]);
+      const reader = res.body!.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let streamContent = "";
+      let newConversationId = conversationId;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          const data = line.slice(6);
+          if (data === "[DONE]") break;
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed.conversationId) newConversationId = parsed.conversationId;
+            if (parsed.text) {
+              streamContent += parsed.text;
+              setMessages((prev) =>
+                prev.map((m) =>
+                  m.id === streamId ? { ...m, content: streamContent } : m,
+                ),
+              );
+            }
+          } catch {}
+        }
+      }
+
+      if (newConversationId) {
+        setConversationId(newConversationId);
+        localStorage.setItem(CONVERSATION_KEY, newConversationId);
+      }
+
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === streamId ? { ...m, id: "done" } : m,
+        ),
+      );
     } catch {
-      setMessages((prev) => [
-        ...prev.filter((m) => m.id !== "temp"),
-        { id: "temp", role: "user", content: text },
-        { id: "error", role: "assistant", content: "Sorry, something went wrong. Please try again." },
-      ]);
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === streamId
+            ? { ...m, id: "error", content: "Sorry, something went wrong. Please try again." }
+            : m,
+        ),
+      );
     } finally {
       setSending(false);
     }
