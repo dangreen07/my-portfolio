@@ -2,27 +2,43 @@ import Link from "next/link";
 
 const focusAreas = [
   {
-    title: "Product engineering",
+    title: "Product ideas",
     description:
-      "I build polished web experiences with a product mindset — thoughtful UX, clean architecture, and fast iteration.",
+      "I like turning rough concepts into working products — from lead-gen tools and workflow apps to AI helpers that solve a real problem.",
   },
   {
-    title: "AI & automation",
+    title: "Research & analysis",
     description:
-      "I enjoy turning messy workflows into useful systems using AI, integrations, and smart internal tooling.",
+      "My work often sits at the intersection of data, experimentation, and decision-making — especially around finance, time series, and practical tooling.",
   },
   {
-    title: "Full-stack delivery",
+    title: "Practical systems",
     description:
-      "From idea to implementation, I like shipping end-to-end software that works in the real world and scales with a team.",
+      "I build automation, internal tools, APIs, and experiments across web apps, email tooling, backtesting, and general software projects.",
   },
 ];
 
-const principles = [
-  "Clarity over complexity",
-  "Fast feedback loops",
-  "Simple systems that last",
-  "Code that is easy to maintain",
+const projectHighlights = [
+  {
+    name: "StackMatch",
+    blurb:
+      "A business discovery app for finding companies by location and industry, checking site quality, and surfacing contact details.",
+  },
+  {
+    name: "Quantex",
+    blurb:
+      "An open-source Python library for building, backtesting, and deploying quantitative trading strategies.",
+  },
+  {
+    name: "MailLink",
+    blurb:
+      "A service-account email tool for managing Gmail, Outlook, and SMTP workflows with webhooks and message handling.",
+  },
+  {
+    name: "Mailbox Migration Tool",
+    blurb:
+      "A Rust IMAP migration utility that preserves folder structure, dates, and read state during mailbox transfers.",
+  },
 ];
 
 export default function Home() {
@@ -37,11 +53,11 @@ export default function Home() {
             Daniel Green
           </p>
           <h1 className="mt-4 text-5xl md:text-7xl font-extrabold leading-tight text-slate-900">
-            I build software that is useful, elegant, and genuinely human.
+            I build practical tools, product ideas, and research projects.
           </h1>
           <p className="mt-5 text-lg md:text-xl text-slate-700 max-w-2xl mx-auto">
-            I&apos;m a full-stack developer focused on product experiences, AI-powered tools,
-            and thoughtful web applications that solve real problems.
+            I work across product thinking, AI, data, email infrastructure, and software experiments —
+            with a focus on what&apos;s useful, testable, and worth building.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -55,7 +71,7 @@ export default function Home() {
               href="/about"
               className="inline-block text-sm text-slate-700 hover:underline font-medium"
             >
-              About me
+              More about me
             </Link>
           </div>
         </div>
@@ -76,22 +92,23 @@ export default function Home() {
       </section>
 
       <section className="py-16 border-t border-slate-200">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-            What I care about
+            Selected work
           </p>
           <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
-            Building systems that feel effortless from the outside.
+            Product ideas, AI experiments, and tools built around real use cases.
           </h2>
         </div>
 
         <div className="mt-10 grid md:grid-cols-2 gap-6">
-          {principles.map((principle) => (
+          {projectHighlights.map((project) => (
             <div
-              key={principle}
-              className="border border-slate-200 rounded-lg p-5 text-slate-700 bg-white"
+              key={project.name}
+              className="border border-slate-200 rounded-lg p-5 bg-white"
             >
-              <span className="text-slate-900 font-semibold">{principle}</span>
+              <h3 className="text-lg font-bold text-slate-900">{project.name}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-700">{project.blurb}</p>
             </div>
           ))}
         </div>
@@ -101,12 +118,12 @@ export default function Home() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-              Recent work
+              Writing & research
             </p>
-            <h2 className="mt-3 text-3xl font-bold text-slate-900">Exploring ideas at the edge of product and AI.</h2>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900">I also write about market data, time series, and practical analysis.</h2>
           </div>
-          <Link href="/projects" className="text-sm font-medium text-slate-700 hover:underline">
-            See all projects →
+          <Link href="/blog" className="text-sm font-medium text-slate-700 hover:underline">
+            Read the blog →
           </Link>
         </div>
       </section>
