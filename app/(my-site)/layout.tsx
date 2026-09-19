@@ -4,9 +4,9 @@ import React from "react";
 import Footer from "./components/footer";
 
 export const metadata = {
-  title: "Daniel Green — AI Solutions for Business",
+  title: "Daniel Green — Full-Stack Developer & Product Builder",
   description:
-    "I build custom AI assistants and automations that save time, improve response times, and reduce manual work for businesses.",
+    "Portfolio of Daniel Green, a full-stack developer building product experiences, AI-powered tools, and thoughtful web applications.",
 };
 
 export default function RootLayout({

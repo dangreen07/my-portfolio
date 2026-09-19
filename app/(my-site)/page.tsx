@@ -1,123 +1,113 @@
 import Link from "next/link";
 
-const services = [
+const focusAreas = [
   {
-    title: "AI Strategy & Audit",
+    title: "Product engineering",
     description:
-      "A short discovery engagement to find where AI can help your business. I review your workflows, identify the best use cases, and map out an implementation plan.",
-    items: [
-      "Workflow review & analysis",
-      "AI opportunity identification",
-      "Use case prioritization",
-      "Implementation roadmap",
-    ],
+      "I build polished web experiences with a product mindset — thoughtful UX, clean architecture, and fast iteration.",
   },
   {
-    title: "Custom AI System Build",
+    title: "AI & automation",
     description:
-      "I build tailored AI assistants and chatbots trained on your business data. Internal knowledge bots, customer support, lead qualification, onboarding — whatever you need.",
-    items: [
-      "Trained on your docs, FAQs & SOPs",
-      "Integrated with your tools",
-      "Custom trained for your business",
-      "Deployed and live for your team or customers",
-    ],
+      "I enjoy turning messy workflows into useful systems using AI, integrations, and smart internal tooling.",
   },
   {
-    title: "Automation & Ongoing Support",
+    title: "Full-stack delivery",
     description:
-      "I connect AI to your existing tools — email, Slack, CRM, calendar, helpdesk — and automate repetitive tasks. Then I maintain and improve the system monthly.",
-    items: [
-      "AI workflow automation",
-      "Tool integrations (email, Slack, CRM, etc.)",
-      "Prompt & system improvements",
-      "Monthly maintenance & support",
-    ],
+      "From idea to implementation, I like shipping end-to-end software that works in the real world and scales with a team.",
   },
+];
+
+const principles = [
+  "Clarity over complexity",
+  "Fast feedback loops",
+  "Simple systems that last",
+  "Code that is easy to maintain",
 ];
 
 export default function Home() {
   return (
-    <div>
-      {/* Hero */}
+    <div className="py-10 md:py-16">
       <section
         id="hero"
-        className="h-[calc(100vh-4rem)] flex flex-col justify-center items-center text-center gap-6"
+        className="flex flex-col justify-center items-center text-center gap-6 min-h-[70vh]"
       >
-        <div className="max-w-3xl">
-          <h1 className="text-5xl font-extrabold leading-tight">
-            Custom AI solutions for your business
+        <div className="max-w-4xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+            Daniel Green
+          </p>
+          <h1 className="mt-4 text-5xl md:text-7xl font-extrabold leading-tight text-slate-900">
+            I build software that is useful, elegant, and genuinely human.
           </h1>
-          <p className="mt-3 text-lg text-slate-700 font-medium">
-            I build custom AI assistants and automations that save time, improve response times, and reduce manual work.
+          <p className="mt-5 text-lg md:text-xl text-slate-700 max-w-2xl mx-auto">
+            I&apos;m a full-stack developer focused on product experiences, AI-powered tools,
+            and thoughtful web applications that solve real problems.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/contact"
-              className="inline-block bg-slate-900 text-white px-4 py-2 rounded-md shadow-sm text-sm"
-            >
-              Start a project
-            </Link>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/projects"
-              className="inline-block text-sm text-slate-600 hover:underline"
+              className="inline-block bg-slate-900 text-white px-5 py-2.5 rounded-md shadow-sm text-sm font-medium"
             >
-              See what I&apos;ve built
+              View my projects
+            </Link>
+            <Link
+              href="/about"
+              className="inline-block text-sm text-slate-700 hover:underline font-medium"
+            >
+              About me
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Services */}
       <section className="py-16 border-t border-slate-200">
-        <h2 className="text-3xl font-bold mb-8 text-center">Services</h2>
         <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <div
-                key={service.title}
-                className="border border-slate-200 rounded-lg p-6 flex flex-col"
-              >
-                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-slate-700 mb-4 text-sm">{service.description}</p>
-                <ul className="text-sm text-slate-600 space-y-2 mt-auto">
-                  {service.items.map((item) => (
-                    <li key={item}>✓ {item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {focusAreas.map((area) => (
+            <div
+              key={area.title}
+              className="border border-slate-200 rounded-xl p-6 bg-slate-50/60"
+            >
+              <h2 className="text-xl font-bold mb-3 text-slate-900">{area.title}</h2>
+              <p className="text-slate-700 text-sm leading-6">{area.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Outcomes */}
       <section className="py-16 border-t border-slate-200">
-        <h2 className="text-3xl font-bold mb-8 text-center">What you get</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="p-4">
-            <h3 className="font-semibold text-lg mb-2">Fewer repetitive questions</h3>
-            <p className="text-slate-600 text-sm">
-              Your team stops answering the same questions over and over. An AI assistant handles the common stuff.
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+            What I care about
+          </p>
+          <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
+            Building systems that feel effortless from the outside.
+          </h2>
+        </div>
+
+        <div className="mt-10 grid md:grid-cols-2 gap-6">
+          {principles.map((principle) => (
+            <div
+              key={principle}
+              className="border border-slate-200 rounded-lg p-5 text-slate-700 bg-white"
+            >
+              <span className="text-slate-900 font-semibold">{principle}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="py-16 border-t border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
+              Recent work
             </p>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900">Exploring ideas at the edge of product and AI.</h2>
           </div>
-          <div className="p-4">
-            <h3 className="font-semibold text-lg mb-2">Faster response times</h3>
-            <p className="text-slate-600 text-sm">
-              Customers and employees get answers in seconds instead of waiting for a human.
-            </p>
-          </div>
-          <div className="p-4">
-            <h3 className="font-semibold text-lg mb-2">Less manual admin</h3>
-            <p className="text-slate-600 text-sm">
-              Automate repetitive tasks like data entry, email routing, and form processing.
-            </p>
-          </div>
-          <div className="p-4">
-            <h3 className="font-semibold text-lg mb-2">Better lead handling</h3>
-            <p className="text-slate-600 text-sm">
-              Qualify, route, and respond to leads automatically. Never miss an opportunity.
-            </p>
-          </div>
+          <Link href="/projects" className="text-sm font-medium text-slate-700 hover:underline">
+            See all projects →
+          </Link>
         </div>
       </section>
     </div>
