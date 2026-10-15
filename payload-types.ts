@@ -128,6 +128,7 @@ export interface BlogPost {
   id: number;
   title: string;
   slug: string;
+  description?: string | null;
   publishedAt: string;
   updatedAt: string;
   content: {
@@ -341,6 +342,7 @@ export interface PayloadMigration {
 export interface BlogPostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  description?: T;
   publishedAt?: T;
   updatedAt?: T;
   content?: T;

@@ -51,6 +51,10 @@ export const BlogPosts: CollectionConfig = {
             required: true,
         },
         {
+            name: "description",
+            type: "textarea",
+        },
+        {
             name: "publishedAt",
             type: "date",
             required: true,

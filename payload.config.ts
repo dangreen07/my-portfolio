@@ -23,6 +23,7 @@ export default buildConfig({
     // Whichever Database Adapter you're using should go here
     // Mongoose is shown as an example, but you can also use Postgres
     db: postgresAdapter({
+        migrationDir: './migrations',
         pool: {
             connectionString: process.env.DATABASE_URL || '',
         }
