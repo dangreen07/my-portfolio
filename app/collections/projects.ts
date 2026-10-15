@@ -51,6 +51,10 @@ export const Projects: CollectionConfig = {
             required: true
         },
         {
+            name: "description",
+            type: "textarea",
+        },
+        {
             name: 'website',
             type: 'text'
         },

@@ -201,6 +201,7 @@ export interface Project {
   id: number;
   title: string;
   slug: string;
+  description?: string | null;
   website?: string | null;
   github?: string | null;
   'start-date': string;
@@ -407,6 +408,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  description?: T;
   website?: T;
   github?: T;
   'start-date'?: T;
