@@ -11,9 +11,9 @@ export const BlogPosts: CollectionConfig = {
     },
     hooks: {
         afterChange: [
-            async ({ req }) => {
+            ({ doc }) => {
                 revalidatePath("/blog");
-                return req;
+                return doc;
             }
         ]
     },

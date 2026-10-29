@@ -11,9 +11,9 @@ export const Projects: CollectionConfig = {
     },
     hooks: {
         afterChange: [
-            async ({ req }) => {
+            ({ doc }) => {
                 revalidatePath("/projects");
-                return req;
+                return doc;
             }
         ]
     },
