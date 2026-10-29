@@ -1,20 +1,20 @@
 import Link from "next/link";
 
-const focusAreas = [
+const areasOfWork = [
   {
-    title: "Product ideas",
+    title: "Web development",
     description:
-      "I like turning rough concepts into working products — from lead-gen tools and workflow apps to AI helpers that solve a real problem.",
+      "I've built web apps and business tools with technologies like Next.js and TypeScript.",
   },
   {
-    title: "Research & analysis",
+    title: "Email",
     description:
-      "My work often sits at the intersection of data, experimentation, and decision-making — especially around finance, time series, and practical tooling.",
+      "I made MailLink for email workflows and a Rust tool for moving IMAP mailboxes.",
   },
   {
-    title: "Practical systems",
+    title: "Markets & data",
     description:
-      "I build automation, internal tools, APIs, and experiments across web apps, email tooling, backtesting, and general software projects.",
+      "I've built Quantex, an open-source trading research library, and written about market data and time series.",
   },
 ];
 
@@ -22,22 +22,22 @@ const projectHighlights = [
   {
     name: "StackMatch",
     blurb:
-      "A business discovery app for finding companies by location and industry, checking site quality, and surfacing contact details.",
+      "I built StackMatch to find businesses by location and industry, check their websites, and surface contact details.",
   },
   {
     name: "Quantex",
     blurb:
-      "An open-source Python library for building, backtesting, and deploying quantitative trading strategies.",
+      "An open-source Python library for building and backtesting trading strategies.",
   },
   {
     name: "MailLink",
     blurb:
-      "A service-account email tool for managing Gmail, Outlook, and SMTP workflows with webhooks and message handling.",
+      "I built MailLink to manage Gmail, Outlook, and SMTP workflows, with webhooks for handling messages.",
   },
   {
     name: "Mailbox Migration Tool",
     blurb:
-      "A Rust IMAP migration utility that preserves folder structure, dates, and read state during mailbox transfers.",
+      "I wrote this Rust tool to move IMAP mailboxes while keeping folders, dates, and read status intact.",
   },
 ];
 
@@ -49,15 +49,11 @@ export default function Home() {
         className="flex flex-col justify-center items-center text-center gap-6 min-h-[70vh]"
       >
         <div className="max-w-4xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Daniel Green
-          </p>
           <h1 className="mt-4 text-5xl md:text-7xl font-extrabold leading-tight text-slate-900">
-            I build practical tools, product ideas, and research projects.
+            Projects, tools, and research.
           </h1>
           <p className="mt-5 text-lg md:text-xl text-slate-700 max-w-2xl mx-auto">
-            I work across product thinking, AI, data, email infrastructure, and software experiments —
-            with a focus on what&apos;s useful, testable, and worth building.
+            I&apos;m Daniel Green, a full-stack developer. This is a collection of web apps, email tools, open-source projects, and writing I&apos;ve worked on.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -65,13 +61,13 @@ export default function Home() {
               href="/projects"
               className="inline-block bg-slate-900 text-white px-5 py-2.5 rounded-md shadow-sm text-sm font-medium"
             >
-              View my projects
+              Browse projects
             </Link>
             <Link
               href="/about"
               className="inline-block text-sm text-slate-700 hover:underline font-medium"
             >
-              More about me
+              About
             </Link>
           </div>
         </div>
@@ -79,7 +75,7 @@ export default function Home() {
 
       <section className="py-16 border-t border-slate-200">
         <div className="grid md:grid-cols-3 gap-8">
-          {focusAreas.map((area) => (
+          {areasOfWork.map((area) => (
             <div
               key={area.title}
               className="border border-slate-200 rounded-xl p-6 bg-slate-50/60"
@@ -94,10 +90,10 @@ export default function Home() {
       <section className="py-16 border-t border-slate-200">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-            Selected work
+            Projects
           </p>
           <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
-            Product ideas, AI experiments, and tools built around real use cases.
+            A few things I&apos;ve made.
           </h2>
         </div>
 
@@ -118,9 +114,9 @@ export default function Home() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-              Writing & research
+              Writing
             </p>
-            <h2 className="mt-3 text-3xl font-bold text-slate-900">I also write about market data, time series, and practical analysis.</h2>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900">Notes on markets, data, and time series.</h2>
           </div>
           <Link href="/blog" className="text-sm font-medium text-slate-700 hover:underline">
             Read the blog →
