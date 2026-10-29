@@ -3,19 +3,14 @@
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const serviceTypes = [
-  "AI Strategy & Audit",
-  "Custom AI System Build",
-  "Automation & Ongoing Support",
-  "Something else",
-] as const;
-
 export default function Contact() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-  const [serviceType, setServiceType] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [helpNeeded, setHelpNeeded] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +26,13 @@ export default function Contact() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ serviceType, email, recaptchaToken: token }),
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          helpNeeded,
+          recaptchaToken: token,
+        }),
       });
 
       if (!response.ok) {
@@ -39,8 +40,10 @@ export default function Contact() {
       }
 
       setSubmitStatus("success");
-      setServiceType("");
+      setFirstName("");
+      setLastName("");
       setEmail("");
+      setHelpNeeded("");
       recaptchaRef.current?.reset();
       setTimeout(() => setSubmitStatus("idle"), 5000);
     } catch {
@@ -56,38 +59,43 @@ export default function Contact() {
       <div className="max-w-xl">
         <h1 className="text-4xl font-extrabold mb-4">Get in touch</h1>
         <p className="text-lg text-slate-700 mb-8">
-          Pick the service you&apos;re interested in and leave your email. I&apos;ll reach out to discuss next steps.
+          Tell me a little about yourself and what you&apos;re working on.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <fieldset>
-            <legend className="block text-sm font-medium mb-3">What do you need help with? *</legend>
-            <div className="space-y-3">
-              {serviceTypes.map((type) => (
-                <label
-                  key={type}
-                  className={`block border rounded-lg p-4 cursor-pointer transition-colors ${
-                    serviceType === type
-                      ? "border-slate-900 bg-slate-50"
-                      : "border-slate-200 hover:border-slate-400"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="radio"
-                      name="serviceType"
-                      value={type}
-                      checked={serviceType === type}
-                      onChange={(e) => setServiceType(e.target.value)}
-                      required
-                      className="accent-slate-900"
-                    />
-                    <span className="text-sm font-medium">{type}</span>
-                  </div>
-                </label>
-              ))}
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label htmlFor="firstName" className="block text-sm font-medium mb-2">
+                First name *
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+                autoComplete="given-name"
+                className="w-full px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900"
+              />
             </div>
-          </fieldset>
+
+            <div>
+              <label htmlFor="lastName" className="block text-sm font-medium mb-2">
+                Last name *
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+                autoComplete="family-name"
+                className="w-full px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900"
+              />
+            </div>
+          </div>
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium mb-2">
@@ -102,6 +110,22 @@ export default function Contact() {
               required
               className="w-full px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900"
               placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="helpNeeded" className="block text-sm font-medium mb-2">
+              What do you need help with? *
+            </label>
+            <textarea
+              id="helpNeeded"
+              name="helpNeeded"
+              value={helpNeeded}
+              onChange={(e) => setHelpNeeded(e.target.value)}
+              required
+              rows={5}
+              className="w-full px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-900"
+              placeholder="Tell me a bit about your project or question..."
             />
           </div>
 
@@ -130,7 +154,7 @@ export default function Contact() {
 
           <button
             type="submit"
-            disabled={isSubmitting || !serviceType}
+            disabled={isSubmitting}
             className="w-full bg-slate-900 text-white px-6 py-3 rounded-md font-medium hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Sending..." : "Send inquiry"}

@@ -3,9 +3,19 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { serviceType, email, recaptchaToken } = await request.json();
+    const { firstName, lastName, email, helpNeeded, recaptchaToken } =
+      await request.json();
 
-    if (!serviceType || !email) {
+    if (
+      typeof firstName !== "string" ||
+      typeof lastName !== "string" ||
+      typeof email !== "string" ||
+      typeof helpNeeded !== "string" ||
+      !firstName.trim() ||
+      !lastName.trim() ||
+      !email.trim() ||
+      !helpNeeded.trim()
+    ) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 },
@@ -50,20 +60,21 @@ export async function POST(request: NextRequest) {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
-      subject: `New service inquiry: ${serviceType}`,
+      subject: `New contact form message from ${firstName.trim()} ${lastName.trim()}`,
       text: `
-New service inquiry:
+New contact form message:
 
-Service type: ${serviceType}
-Email: ${email}
+Name: ${firstName.trim()} ${lastName.trim()}
+Email: ${email.trim()}
 
-Reply to: ${email}
+What they need help with:
+${helpNeeded.trim()}
       `,
-      replyTo: email,
+      replyTo: email.trim(),
     });
 
     return NextResponse.json(
-      { message: "Inquiry sent successfully" },
+      { message: "Message sent successfully" },
       { status: 200 },
     );
   } catch (error) {
